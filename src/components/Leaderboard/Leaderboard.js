@@ -2,14 +2,19 @@ import React from "react";
 import styles from "./Leaderboard.module.css";
 
 export default function Leaderboard() {
-  // Pseudocode for leaderboard functions
+  // Pre-condition: 1 or more users exist
+  // Post-condition: Sorts and displays top 3 users highest to lowest, keeping in account the user's
+  // score. If user is not a part of top 3 users, their ranking is displayed underneath the leaderboard with their points total.
   // const getTopScores = () => {
-  //   call to server
+  //   call to LeaderBoardModel in database
+  // return scores;
   // }
 
-  // const createLeaderboard = () => {
+  // pre: scores have been parsed with getTopScores function
+  // post: returns JSX element of Leaderboard list
+  // const createLeaderboard = (scores) => {
   //  scores.map(score => {
-  //  return <div></div>
+  //  return <div>score.player</div>;
   // })
   // }
 
