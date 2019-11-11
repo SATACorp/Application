@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Quiz.module.css";
+import { useStyles } from "./styles";
 
 export default function Quiz() {
   // Calls to QuizModel in database
@@ -28,6 +28,10 @@ export default function Quiz() {
   // const updatePoints = (userId) => {
   // updates user points
   // }
-
-  return <div className={styles.container}>Quiz</div>;
+  const classes = useStyles();
+  return (
+    <div className={classes.container}>
+      <h1>Quiz</h1>
+    </div>
+  );
 }

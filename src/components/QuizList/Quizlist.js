@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./QuizList.module.css";
+import { useStyles } from "./styles";
 
 export default function QuizList() {
   // Functions necessary for quiz retrieval
@@ -12,5 +12,11 @@ export default function QuizList() {
   // create JSX element of quiz list
   // }
 
-  return <div className={styles.container}>QuizList</div>;
+  const classes = useStyles();
+
+  return (
+    <div className={classes.container}>
+      <h1>Quizzes</h1>
+    </div>
+  );
 }

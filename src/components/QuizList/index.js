@@ -1,1 +1,1 @@
-export { default as QuizList } from "./QuizList.module.css";
+export { default as QuizList } from "./QuizList.js";

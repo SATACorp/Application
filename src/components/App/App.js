@@ -6,6 +6,7 @@ import { Signup } from "../../components/Signup";
 import { Feed } from "../../components/Feed";
 import { Profile } from "../../components/Profile";
 import { Leaderboard } from "../../components/Leaderboard";
+import { QuizList } from "../../components/QuizList";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
 import firebase from "../../firebase";
@@ -30,6 +31,7 @@ function App() {
         path="/profile"
         render={() => <Profile setLoggedIn={setLoggedIn} />}
       />
+      <Route exact path="/quizzes" render={() => <QuizList />} />
       <Route exact path="/leaderboard" render={() => <Leaderboard />} />
     </>
   ) : (

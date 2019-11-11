@@ -6,6 +6,7 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import HomeIcon from "@material-ui/icons/Home";
 import ScoreIcon from "@material-ui/icons/Score";
+import DoneOutlineIcon from "@material-ui/icons/DoneOutline";
 
 export default function Navbar(props) {
   const classes = useStyles();
@@ -19,6 +20,14 @@ export default function Navbar(props) {
         label="Feed"
         value="feed"
         icon={<HomeIcon />}
+      />
+      <BottomNavigationAction
+        className={classes.icon}
+        component={Link}
+        to={`${props.isLoggedIn ? "/quizzes" : "/login"}`}
+        label="Quizzes"
+        value="quizzes"
+        icon={<DoneOutlineIcon />}
       />
       <BottomNavigationAction
         className={classes.icon}
