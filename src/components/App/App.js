@@ -7,7 +7,7 @@ import { Feed } from "../../components/Feed";
 import { Profile } from "../../components/Profile";
 import { Leaderboard } from "../../components/Leaderboard";
 import { QuizList } from "../../components/QuizList";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
 import firebase from "../../firebase";
 
@@ -16,25 +16,16 @@ function App() {
 
   const [firebaseInitialized, setFirebaseInitialized] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     firebase.isInitialized().then(val => {
       setFirebaseInitialized(val);
     });
+    setIsLoading(false);
   }, [loggedIn]);
 
-  const routes = firebase.isLoggedIn() ? (
-    <>
-      <Route exact path="/feed" render={() => <Feed />} />
-      <Route
-        exact
-        path="/profile"
-        render={() => <Profile setLoggedIn={setLoggedIn} />}
-      />
-      <Route exact path="/quizzes" render={() => <QuizList />} />
-      <Route exact path="/leaderboard" render={() => <Leaderboard />} />
-    </>
-  ) : (
+  const routes = !isLoading ? (
     <>
       <Route
         exact
@@ -46,7 +37,31 @@ function App() {
         path="/login"
         render={() => <Login setLoggedIn={setLoggedIn} />}
       />
+      <PrivateRoute authed={loggedIn} exact path="/feed" component={Feed} />
+      <PrivateRoute
+        authed={loggedIn}
+        exact
+        path="/profile"
+        component={Profile}
+        setLoggedIn={setLoggedIn}
+      />
+      <PrivateRoute
+        authed={loggedIn}
+        exact
+        path="/quizzes"
+        component={QuizList}
+      />
+      <PrivateRoute
+        authed={loggedIn}
+        exact
+        path="/leaderboard"
+        component={Leaderboard}
+      />
     </>
+  ) : (
+    <div className={classes.loader}>
+      <CircularProgress />
+    </div>
   );
 
   return firebaseInitialized !== false ? (
@@ -63,4 +78,47 @@ function App() {
   );
 }
 
+function PrivateRoute({ component: Component, authed, setLoggedIn, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        authed === true ? (
+          <Component {...props} setLoggedIn={setLoggedIn} />
+        ) : (
+          <Redirect
+            to={{ pathname: "/login", state: { from: props.location } }}
+          />
+        )
+      }
+    />
+  );
+}
+
 export default App;
+
+// const routes = firebase.isLoggedIn() ? (
+//   <>
+//     <Route exact path="/feed" render={() => <Feed />} />
+//     <Route
+//       exact
+//       path="/profile"
+//       render={() => <Profile setLoggedIn={setLoggedIn} />}
+//     />
+//     <Route exact path="/quizzes" render={() => <QuizList />} />
+//     <Route exact path="/leaderboard" render={() => <Leaderboard />} />
+//   </>
+// ) : (
+//   <>
+//     <Route
+//       exact
+//       path="/signup"
+//       render={() => <Signup setLoggedIn={setLoggedIn} />}
+//     />
+//     <Route
+//       exact
+//       path="/login"
+//       render={() => <Login setLoggedIn={setLoggedIn} />}
+//     />
+//   </>
+// );

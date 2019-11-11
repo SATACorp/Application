@@ -16,7 +16,7 @@ export default function Navbar(props) {
       <BottomNavigationAction
         className={classes.icon}
         component={Link}
-        to={`${props.isLoggedIn ? "/feed" : "/login"}`}
+        to="/feed"
         label="Feed"
         value="feed"
         icon={<HomeIcon />}
@@ -24,7 +24,7 @@ export default function Navbar(props) {
       <BottomNavigationAction
         className={classes.icon}
         component={Link}
-        to={`${props.isLoggedIn ? "/quizzes" : "/login"}`}
+        to="/quizzes"
         label="Quizzes"
         value="quizzes"
         icon={<DoneOutlineIcon />}
@@ -32,7 +32,7 @@ export default function Navbar(props) {
       <BottomNavigationAction
         className={classes.icon}
         component={Link}
-        to={`${props.isLoggedIn ? "/leaderboard" : "/login"}`}
+        to="/leaderboard"
         label="Leaderboard"
         value="leaderboard"
         icon={<ScoreIcon />}
@@ -40,7 +40,7 @@ export default function Navbar(props) {
       <BottomNavigationAction
         className={classes.icon}
         component={Link}
-        to={`${props.isLoggedIn ? "/profile" : "/login"}`}
+        to="/profile"
         label="Profile"
         value="profile"
         icon={<AccountCircleIcon />}
