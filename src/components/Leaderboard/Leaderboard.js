@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Leaderboard.module.css";
+import { useStyles } from "./styles";
 
 export default function Leaderboard() {
   // Pre-condition: 1 or more users exist
@@ -18,5 +18,11 @@ export default function Leaderboard() {
   // })
   // }
 
-  return <div className={styles.container}></div>;
+  const classes = useStyles();
+
+  return (
+    <div className={classes.container}>
+      <h1>Leaderboard</h1>
+    </div>
+  );
 }

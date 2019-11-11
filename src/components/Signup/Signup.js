@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useStyles } from "./styles";
 import firebase from "../../firebase.js";
 import Avatar from "@material-ui/core/Avatar";
@@ -11,15 +11,15 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 
-function Login(props) {
+function Signup(props) {
   const classes = useStyles();
-
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   async function handleSubmit() {
     try {
-      await firebase.login(email, password);
+      await firebase.register(username, email, password);
       props.setLoggedIn(true);
       props.history.replace("/feed");
     } catch (err) {
@@ -35,7 +35,7 @@ function Login(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Log In
+          Sign Up
         </Typography>
         <form
           className={classes.form}
@@ -43,6 +43,18 @@ function Login(props) {
           onSubmit={e => e.preventDefault()}
         >
           <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                onChange={e => setUsername(e.target.value)}
+              />
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -78,12 +90,12 @@ function Login(props) {
               className={classes.submit}
               onClick={handleSubmit}
             >
-              Log In
+              Sign Up
             </Button>
           </Grid>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link to="/signup">Don't have an account? Sign up</Link>
+              <Link to="/login">Already have an account? Sign in</Link>
             </Grid>
           </Grid>
         </form>
@@ -92,4 +104,4 @@ function Login(props) {
   );
 }
 
-export default withRouter(Login);
+export default withRouter(Signup);
