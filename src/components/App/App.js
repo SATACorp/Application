@@ -6,7 +6,7 @@ import { Signup } from "../../components/Signup";
 import { Feed } from "../../components/Feed";
 import { Profile } from "../../components/Profile";
 import { Leaderboard } from "../../components/Leaderboard";
-import { QuizList } from "../../components/QuizList";
+import { Quizlist } from "../components/../Quizlist";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
 import firebase from "../../firebase";
@@ -49,7 +49,7 @@ function App() {
         authed={loggedIn}
         exact
         path="/quizzes"
-        component={QuizList}
+        component={Quizlist}
       />
       <PrivateRoute
         authed={loggedIn}
@@ -96,29 +96,3 @@ function PrivateRoute({ component: Component, authed, setLoggedIn, ...rest }) {
 }
 
 export default App;
-
-// const routes = firebase.isLoggedIn() ? (
-//   <>
-//     <Route exact path="/feed" render={() => <Feed />} />
-//     <Route
-//       exact
-//       path="/profile"
-//       render={() => <Profile setLoggedIn={setLoggedIn} />}
-//     />
-//     <Route exact path="/quizzes" render={() => <QuizList />} />
-//     <Route exact path="/leaderboard" render={() => <Leaderboard />} />
-//   </>
-// ) : (
-//   <>
-//     <Route
-//       exact
-//       path="/signup"
-//       render={() => <Signup setLoggedIn={setLoggedIn} />}
-//     />
-//     <Route
-//       exact
-//       path="/login"
-//       render={() => <Login setLoggedIn={setLoggedIn} />}
-//     />
-//   </>
-// );

@@ -1,13 +1,13 @@
 import React from "react";
 import { useStyles } from "./styles";
 
-export default function QuizList() {
+export default function Quizlist() {
   // Functions necessary for quiz retrieval
 
   // const getQuizzes = () => {
   //  API / database call
   // }
-
+  //
   // const makeQuizList = () => {
   // create JSX element of quiz list
   // }

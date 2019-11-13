@@ -1,1 +1,1 @@
-export { default as QuizList } from "./QuizList.js";
+export { default as Quizlist } from "./Quizlist.js";
