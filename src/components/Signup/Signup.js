@@ -30,6 +30,9 @@ function Signup(props) {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
+      <Typography component="h3" variant="h5">
+        SendNews
+      </Typography>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
