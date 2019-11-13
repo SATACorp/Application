@@ -6,7 +6,7 @@ import { Signup } from "../../components/Signup";
 import { Feed } from "../../components/Feed";
 import { Profile } from "../../components/Profile";
 import { Leaderboard } from "../../components/Leaderboard";
-import { Quizlist } from "../components/../Quizlist";
+import { Quizzes } from "../../components/Quizzes";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
 import firebase from "../../firebase";
@@ -49,7 +49,7 @@ function App() {
         authed={loggedIn}
         exact
         path="/quizzes"
-        component={Quizlist}
+        component={Quizzes}
       />
       <PrivateRoute
         authed={loggedIn}
