@@ -12,7 +12,8 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_storageBucket,
   messagingSenderId: process.env.REACT_APP_messagingSenderId,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_measurementId
+  measurementId: process.env.REACT_APP_measurementId,
+  newsApiKey: process.env.REACT_APP_NEWS_API_KEY
 };
 
 class Firebase {
