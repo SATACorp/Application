@@ -1,5 +1,9 @@
 import React from "react";
 import { useStyles } from "./styles";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
 
 export default function Leaderboard() {
   // Pre-condition: 1 or more users exist
@@ -21,8 +25,12 @@ export default function Leaderboard() {
   const classes = useStyles();
 
   return (
-    <div className={classes.container}>
-      <h1>Leaderboard</h1>
-    </div>
+    <Container component="main" maxWidth="s">
+      <div className={classes.container}>
+        <h1>Leaderboard</h1>
+        <h2> This is where leaders and their scores will be posted </h2>
+      </div>
+    </Container>
+
   );
 }
