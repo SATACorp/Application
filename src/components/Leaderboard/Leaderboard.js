@@ -30,6 +30,9 @@ export default function Leaderboard() {
         <h1>Leaderboard</h1>
         <h2> This is where leaders and their scores will be posted </h2>
       </div>
+      <div className={classes.container}>
+        <img src = "Logo.png"></img>
+      </div>
     </Container>
 
   );
