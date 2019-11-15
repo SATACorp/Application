@@ -4,6 +4,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import Logo from './Logo.png'
 
 export default function Leaderboard() {
   // Pre-condition: 1 or more users exist
@@ -25,13 +26,13 @@ export default function Leaderboard() {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="s">
+    <Container component="main" maxWidth="xs">
       <div className={classes.container}>
         <h1>Leaderboard</h1>
         <h2> This is where leaders and their scores will be posted </h2>
       </div>
       <div className={classes.container}>
-        <img src = "Logo.png"></img>
+        <img src = {Logo} />
       </div>
     </Container>
 
