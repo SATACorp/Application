@@ -48,8 +48,29 @@ class Firebase {
     return this.auth.currentUser && this.auth.currentUser.displayName;
   }
 
-  isLoggedIn() {
-    return this.auth.currentUser ? true : false;
+  getCurrentUser() {
+    if (this.auth.currentUser) {
+      return this.auth.currentUser;
+    }
+  }
+
+  getCurrrentUID() {
+    this.auth.onAuthStateChanged(user => {
+      if (user) {
+        if (this.auth.currentUser && this.auth.currentUser.uid) {
+          return this.auth.currentUser.uid;
+        }
+      }
+    });
+  }
+
+  isLoggedIn(user) {
+    this.auth.onAuthStateChanged(user => {
+      if (user != null) {
+        return true;
+      }
+    });
+    return false;
   }
 }
 

@@ -39,7 +39,6 @@ export default function Leaderboard() {
         <Grid item xs={5}>
           <Button
             type="checkUser"
-            fullWidth
             variant="contained"
             color="primary"
             className={classes.checkUser}
@@ -49,9 +48,8 @@ export default function Leaderboard() {
         <Grid item xs={5}>
           <Button
             type="checkUser"
-            fullWidth
             variant="contained"
-            color="primary"
+            color="secondary"
             className={classes.checkUser}
             >This is user two's data!
           </Button>
@@ -59,9 +57,8 @@ export default function Leaderboard() {
         <Grid item xs={5}>
           <Button
             type="checkUser"
-            fullWidth
             variant="contained"
-            color="primary"
+            color="default"
             className={classes.checkUser}
             >This is user three's data!
           </Button>
@@ -69,7 +66,6 @@ export default function Leaderboard() {
         <Grid item xs={5}>
           <Button
             type="checkUser"
-            fullWidth
             variant="contained"
             color="primary"
             className={classes.checkUser}
