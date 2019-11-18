@@ -3,6 +3,8 @@ import { useStyles } from "./styles";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import firebase from "../../firebase";
+import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
 
 function Profile(props) {
   const classes = useStyles();
@@ -14,16 +16,27 @@ function Profile(props) {
   };
 
   return (
-    <div className={classes.container}>
-      <h1>Profile</h1>{" "}
-      <Button
-        variant="contained"
-        className={classes.button}
-        onClick={handleLogout}
-      >
-        Logout
-      </Button>
-    </div>
+    <Container>
+      <div className={classes.container}>
+        <h1>User Profile</h1>{" "}
+        <div>
+          <Box 
+            color="white" 
+            bgcolor="black" p={6}
+          >
+            User Profile
+          </Box>
+        </div>
+        <Button
+          variant="contained"
+          className={classes.button}
+          onClick={handleLogout}
+        >
+          Logout
+        </Button>
+      </div>
+    </Container>
+
   );
 }
 
