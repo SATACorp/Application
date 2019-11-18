@@ -8,6 +8,6 @@ export const useStyles = makeStyles(theme => ({
   
   checkUser: {
     margin: theme.spacing(3),
-    alignContent: "center"
+    alignItems: "center"
   }
 }));
