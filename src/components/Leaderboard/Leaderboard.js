@@ -4,7 +4,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import Logo from "../Logo.png";
+import Logo from "../../assets/Logo.png";
 import { flexbox } from "@material-ui/system";
 import Grid from "@material-ui/core/Grid";
 
@@ -32,7 +32,7 @@ export default function Leaderboard() {
       <div className={classes.container}>
         <h1>Leaderboard</h1>
         <h2> This is where leaders and their scores will be posted </h2>
-        <img src = {Logo}></img>
+        <img src={Logo}></img>
       </div>
 
       <Grid>
@@ -42,7 +42,8 @@ export default function Leaderboard() {
             variant="contained"
             color="primary"
             className={classes.checkUser}
-            >This is user one's data!
+          >
+            This is user one's data!
           </Button>
         </Grid>
         <Grid item xs={5}>
@@ -51,7 +52,8 @@ export default function Leaderboard() {
             variant="contained"
             color="secondary"
             className={classes.checkUser}
-            >This is user two's data!
+          >
+            This is user two's data!
           </Button>
         </Grid>
         <Grid item xs={5}>
@@ -60,7 +62,8 @@ export default function Leaderboard() {
             variant="contained"
             color="default"
             className={classes.checkUser}
-            >This is user three's data!
+          >
+            This is user three's data!
           </Button>
         </Grid>
         <Grid item xs={5}>
@@ -69,11 +72,11 @@ export default function Leaderboard() {
             variant="contained"
             color="primary"
             className={classes.checkUser}
-            >This is user your user points total!
+          >
+            This is user your user points total!
           </Button>
         </Grid>
       </Grid>
     </Container>
-
   );
 }

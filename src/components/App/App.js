@@ -15,8 +15,13 @@ function App() {
   const classes = useStyles();
 
   const [firebaseInitialized, setFirebaseInitialized] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState();
   const [isLoading, setIsLoading] = useState(true);
+
+  // async function that maintains login state
+  firebase.auth.onAuthStateChanged(user => {
+    setLoggedIn(true);
+  });
 
   useEffect(() => {
     firebase.isInitialized().then(val => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { useStyles } from "./styles";
 import firebase from "../../firebase";
-import NewsCard from "../NewsCard/NewsCard"
+import NewsCard from "../NewsCard/NewsCard";
 
 export default function Feed() {
   const classes = useStyles();
