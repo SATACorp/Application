@@ -28,15 +28,14 @@ export default function Leaderboard() {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="xl">
-      <div className={classes.container}>
+    <Container className={classes.container} component="main" maxWidth="xl">
+      <div>
         <h1>Leaderboard</h1>
         <h2> This is where leaders and their scores will be posted </h2>
         <img src={Logo}></img>
       </div>
-
       <Grid>
-        <Grid item xs={5}>
+        <Grid item xs={12}>
           <Button
             type="checkUser"
             variant="contained"
@@ -46,7 +45,7 @@ export default function Leaderboard() {
             This is user one's data!
           </Button>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={12}>
           <Button
             type="checkUser"
             variant="contained"
@@ -56,7 +55,7 @@ export default function Leaderboard() {
             This is user two's data!
           </Button>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={12}>
           <Button
             type="checkUser"
             variant="contained"
@@ -66,7 +65,7 @@ export default function Leaderboard() {
             This is user three's data!
           </Button>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={12}>
           <Button
             type="checkUser"
             variant="contained"

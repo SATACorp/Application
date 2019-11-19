@@ -20,7 +20,11 @@ function App() {
 
   // async function that maintains login state
   firebase.auth.onAuthStateChanged(user => {
-    setLoggedIn(true);
+    if (user) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
   });
 
   useEffect(() => {
