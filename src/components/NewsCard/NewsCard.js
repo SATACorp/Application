@@ -37,16 +37,16 @@ export default function NewsCard() {
     return (
       <Card className={classes.card}>
         <CardHeader 
-          title={newsArticle[0].title}
-          subheader={newsArticle[0].source.name}
+          title={newsArticle[1].title}
+          subheader={newsArticle[1].source.name}
         />
         <CardMedia
           className={classes.media}
-          image={newsArticle[0].urlToImage}
+          image={newsArticle[1].urlToImage}
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            {newsArticle[0].description}
+            {newsArticle[1].description}
           </Typography>
         </CardContent>
       </Card>
