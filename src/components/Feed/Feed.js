@@ -9,7 +9,9 @@ export default function Feed() {
     <div className={classes.container}>
       <h1>Feed</h1>
       <h2>Hello {firebase.getCurrentUsername()}</h2>
-      <NewsCard />
+      <h3>
+        <NewsCard />
+      </h3>
     </div>
   );
 }
