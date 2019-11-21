@@ -18,13 +18,9 @@ function Profile(props) {
   return (
     <Container>
       <div className={classes.container}>
-        <h1>User Profile</h1>{" "}
         <div>
-          <Box 
-            color="white" 
-            bgcolor="black" p={6}
-          >
-            User Profile
+          <Box color="white" bgcolor="black" p={6}>
+            <h2>Hello {firebase.getCurrentUsername()}</h2>
           </Box>
         </div>
         <Button
@@ -36,7 +32,6 @@ function Profile(props) {
         </Button>
       </div>
     </Container>
-
   );
 }
 
