@@ -26,7 +26,7 @@ export default function NewsCard() {
 
   useEffect(() => {
     logArticlesArray();
-  }, []);
+  }, [newsArticle]);
 
   function logArticlesArray() {
     console.log(newsArticle);
