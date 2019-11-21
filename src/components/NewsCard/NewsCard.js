@@ -7,6 +7,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import { CircularProgress } from "@material-ui/core";
 
 export default function NewsCard() {
   const classes = useStyles();
@@ -51,6 +52,10 @@ export default function NewsCard() {
       </Card>
     );
   } else {
-    return <div>News Card</div>;
+    return (
+      <div className={classes.loader}>
+        <CircularProgress />
+      </div>
+    );
   }
 }
