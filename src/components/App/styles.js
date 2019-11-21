@@ -4,7 +4,7 @@ export const useStyles = makeStyles(theme => ({
   container: {
     textAlign: "center",
     height: "100%",
-    width: "100%"
+    maxWidth: "100%"
   },
   loader: {
     position: "fixed",

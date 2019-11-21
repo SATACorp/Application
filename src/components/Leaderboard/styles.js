@@ -1,16 +1,18 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import indigo from '@material-ui/core/colors/indigo';
-import pink from '@material-ui/core/colors/pink';
-import red from '@material-ui/core/colors/red';
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import indigo from "@material-ui/core/colors/indigo";
+import pink from "@material-ui/core/colors/pink";
+import red from "@material-ui/core/colors/red";
 
 export const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "column"
+    flexDirection: "column",
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1)
   },
 
   paper: {
@@ -21,13 +23,10 @@ export const useStyles = makeStyles(theme => ({
   checkUser: {
     margin: theme.spacing(3),
     alignItems: "center"
-  },
-
-
-}))
+  }
+}));
 
 export const theme = createMuiTheme({
-
   palette: {
     primary: indigo,
     secondary: pink,
@@ -41,7 +40,7 @@ export const theme = createMuiTheme({
     tonalOffset: 0.2,
     background: {
       default: "#303030"
-    },
+    }
   },
 
   typography: {
@@ -49,7 +48,6 @@ export const theme = createMuiTheme({
       fontSize: 30,
       font: "Roboto",
       fontStyle: "italic"
-    },
-  },
-
+    }
+  }
 });

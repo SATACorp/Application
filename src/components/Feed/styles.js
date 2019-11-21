@@ -5,6 +5,8 @@ export const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "column"
+    flexDirection: "column",
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1)
   }
 }));
