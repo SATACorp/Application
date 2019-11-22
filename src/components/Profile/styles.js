@@ -1,10 +1,13 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles(theme => ({
+  card: {
+    maxWidth: 250,
+  },
   container: {
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
-    maxWidth: "1024px",
+    maxWidth: 350,
     margin: "0 auto"
   },
   button: {
@@ -12,5 +15,5 @@ export const useStyles = makeStyles(theme => ({
   },
   card: {
     margin: theme.spacing(5)
-  }
+  },
 }));
