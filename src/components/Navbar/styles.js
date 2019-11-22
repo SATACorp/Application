@@ -7,7 +7,7 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: "center",
     width: "100%",
     position: "fixed",
-    bottom: 0
+    bottom: 0,
   },
   icon: {}
 }));
