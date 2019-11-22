@@ -8,6 +8,7 @@ import Logo from "../../assets/Logo.png";
 import { flexbox } from "@material-ui/system";
 import Grid from "@material-ui/core/Grid";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 
 export default function Leaderboard(props) {
   // Pre-condition: 1 or more users exist
@@ -32,13 +33,11 @@ export default function Leaderboard(props) {
   return (
     <MuiThemeProvider theme={theme}>
     <Container className={classes.container} component="main" maxWidth="xl">
-      <div>
-        <Typography variant="h1">
-          Leaderboard
-        </Typography>
+      <Typography component="div">
+        <h1> Leaderboard </h1>
         <h2> This is where leaders and their scores will be posted </h2>
         <img src={Logo}></img>
-      </div>
+      </Typography>
       <Grid>
         <Grid item xs={12}>
           <Button
