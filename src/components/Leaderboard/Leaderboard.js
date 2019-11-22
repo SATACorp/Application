@@ -7,7 +7,15 @@ import Container from "@material-ui/core/Container";
 import Logo from "../../assets/Logo.png";
 import { flexbox } from "@material-ui/system";
 import Grid from "@material-ui/core/Grid";
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import IconButton from "@material-ui/core/IconButton";
+import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import SkipNextIcon from "@material-ui/icons/SkipNext";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { LeaderboardCard } from "../LeaderboardCard";
 
 export default function Leaderboard(props) {
   // Pre-condition: 1 or more users exist
@@ -31,57 +39,11 @@ export default function Leaderboard(props) {
 
   return (
     <MuiThemeProvider theme={theme}>
-    <Container className={classes.container} component="main" maxWidth="xl">
-      <div>
-        <Typography variant="h1">
-          Leaderboard
-        </Typography>
-        <h2> This is where leaders and their scores will be posted </h2>
-        <img src={Logo}></img>
-      </div>
-      <Grid>
-        <Grid item xs={12}>
-          <Button
-            type="checkUser"
-            variant="contained"
-            color="primary"
-            className={classes.checkUser}
-          >
-            This is user one's data!
-          </Button>
-        </Grid>
-        <Grid item xs={12}>
-          <Button
-            type="checkUser"
-            variant="contained"
-            color="secondary"
-            className={classes.checkUser}
-          >
-            This is user two's data!
-          </Button>
-        </Grid>
-        <Grid item xs={12}>
-          <Button
-            type="checkUser"
-            variant="contained"
-            color="default"
-            className={classes.checkUser}
-          >
-            This is user three's data!
-          </Button>
-        </Grid>
-        <Grid item xs={12}>
-          <Button
-            type="checkUser"
-            variant="contained"
-            color="primary"
-            className={classes.checkUser}
-          >
-            This is user your user points total!
-          </Button>
-        </Grid>
-      </Grid>
-    </Container>
+      <Container className={classes.container} component="main" maxWidth="xl">
+        <LeaderboardCard username="Username Here" score="Score Here" />
+        <LeaderboardCard username="Username Here" score="Score Here" />
+        <LeaderboardCard username="Username Here" score="Score Here" />
+      </Container>
     </MuiThemeProvider>
   );
 }
