@@ -20,10 +20,6 @@ export default function Feed() {
       });
   }, []);
 
-  // function logArticlesArray() {
-  //   console.log(newsArticle);
-  // }
-
   if (newsArticles != null) {
     const newsCards = newsArticles.map((data, index) => 
     <NewsCard 
