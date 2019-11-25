@@ -7,7 +7,7 @@ export const useStyles = makeStyles(theme => ({
   container: {
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
-    maxWidth: 350,
+    maxWidth: 700,
     margin: "0 auto"
   },
   button: {
@@ -16,4 +16,17 @@ export const useStyles = makeStyles(theme => ({
   card: {
     margin: theme.spacing(5)
   },
+  header: {
+    fontSize:50,
+    color: 'blue',
+    fontFamily: 'Roboto'
+  },
+  secondCard: {
+    fontSize:25,
+    fontFamily: 'Roboto'
+  },
+  thirdCard: {
+    fontSize:20,
+    fontFamily:'Roboto'
+  }
 }));

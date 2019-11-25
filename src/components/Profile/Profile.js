@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
+import { LeaderboardCard } from "../LeaderboardCard";
 
 function Profile(props) {
   const classes = useStyles();
@@ -26,7 +27,7 @@ function Profile(props) {
     <Container className={classes.container}>
       <Card className={classes.card}>
         <CardContent>
-          <h2 id="test">Hello {firebase.getCurrentUsername()}</h2>
+          <h2 className={classes.header}>Hello {firebase.getCurrentUsername()} Welcome to your profile!</h2>
           <Button
             variant="contained"
             className={classes.button}
@@ -34,6 +35,12 @@ function Profile(props) {
           >
             Logout
           </Button>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardContent>
+          <LeaderboardCard username = {firebase.getCurrentUsername()} score = "Score Here"></LeaderboardCard>
+          <h2 className = {classes.thirdCard}>Your position on the leaderboard is: </h2>
         </CardContent>
       </Card>
     </Container>

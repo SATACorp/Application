@@ -23,6 +23,12 @@ export const useStyles = makeStyles(theme => ({
   checkUser: {
     margin: theme.spacing(3),
     alignItems: "center"
+  },
+
+  pageTitle: {
+    color:"white",
+    fontFamily:"Roboto",
+    fontSize: 50
   }
 }));
 
