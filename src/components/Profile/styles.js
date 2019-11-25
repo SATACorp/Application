@@ -13,20 +13,18 @@ export const useStyles = makeStyles(theme => ({
   button: {
     margin: theme.spacing(1)
   },
-  card: {
-    margin: theme.spacing(5)
-  },
-  header: {
-    fontSize:50,
-    color: 'blue',
-    fontFamily: 'Roboto'
-  },
-  secondCard: {
-    fontSize:25,
-    fontFamily: 'Roboto'
-  },
-  thirdCard: {
+  userCard: {
     fontSize:20,
     fontFamily:'Roboto'
+  },
+  pageTitle: {
+    color:"white",
+    fontFamily:"Roboto",
+    fontSize: 50
+  },
+  pageSubtitle: {
+    color:"white",
+    fontFamily:"Roboto",
+    fontSize: 35
   }
 }));

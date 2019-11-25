@@ -25,9 +25,12 @@ function Profile(props) {
 
   return (
     <Container className={classes.container}>
-      <Card className={classes.card}>
+    <h1 className={classes.pageTitle}>Hello {firebase.getCurrentUsername()}</h1>
+    <h2 className={classes.pageSubtitle}>Welcome to your profile!</h2>
+      <Card>
         <CardContent>
-          <h2 className={classes.header}>Hello {firebase.getCurrentUsername()} Welcome to your profile!</h2>
+          <LeaderboardCard username = {firebase.getCurrentUsername()} score = "Score Here"></LeaderboardCard>
+          <h2 className = {classes.userCard}>Your position on the leaderboard is (X) out of (Y USERS).</h2>
           <Button
             variant="contained"
             className={classes.button}
@@ -35,12 +38,6 @@ function Profile(props) {
           >
             Logout
           </Button>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardContent>
-          <LeaderboardCard username = {firebase.getCurrentUsername()} score = "Score Here"></LeaderboardCard>
-          <h2 className = {classes.thirdCard}>Your position on the leaderboard is: </h2>
         </CardContent>
       </Card>
     </Container>
