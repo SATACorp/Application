@@ -1,6 +1,7 @@
 import React from "react";
 import { useStyles } from "./styles";
 import { QuizForm } from "../QuizForm";
+import { Quiz } from "../Quiz";
 
 export default function Quizzes() {
   // Functions necessary for quiz retrieval
@@ -17,8 +18,11 @@ export default function Quizzes() {
 
   return (
     <div className={classes.container}>
-      <h1>Quizzes</h1>
-      <QuizForm />
+      <h2>Quizzes</h2>
+      <Quiz quizName={"Quiz Name Here"} />
+      <Quiz quizName={"Quiz Name Here"} />
+      <Quiz quizName={"Quiz Name Here"} />
+      <Quiz quizName={"Quiz Name Here"} />
     </div>
   );
 }

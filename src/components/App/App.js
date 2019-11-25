@@ -7,6 +7,7 @@ import { Feed } from "../../components/Feed";
 import { Profile } from "../../components/Profile";
 import { Leaderboard } from "../../components/Leaderboard";
 import { Quizzes } from "../../components/Quizzes";
+import { QuizForm } from "../../components/QuizForm";
 import { Header } from "../../components/Header";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
@@ -66,6 +67,12 @@ function App() {
         exact
         path="/leaderboard"
         component={Leaderboard}
+      />
+      <PrivateRoute
+        authed={loggedIn}
+        exact
+        path="/makequiz"
+        component={QuizForm}
       />
     </>
   ) : (

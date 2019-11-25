@@ -3,6 +3,11 @@ import { red } from "@material-ui/core/colors";
 
 export const useStyles = makeStyles(theme => ({
   container: {},
+  button: {
+    "& > *": {
+      margin: theme.spacing(1)
+    }
+  },
   card: {
     maxWidth: 500,
     margin: 25
