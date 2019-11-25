@@ -16,6 +16,7 @@ import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { LeaderboardCard } from "../LeaderboardCard";
+import firebase from "../../firebase";
 
 export default function Leaderboard(props) {
   // Pre-condition: 1 or more users exist
@@ -39,12 +40,18 @@ export default function Leaderboard(props) {
 
   return (
     <MuiThemeProvider theme={theme}>
+    <h1 className={classes.pageTitle}>All-Time Leaderboard</h1>
       <Container className={classes.container} component="main" maxWidth="xl">
-        <h1 className={classes.pageTitle}>All-Time Leaderboard</h1>
         <LeaderboardCard username="Username Here" score="Score Here" />
         <LeaderboardCard username="Username Here" score="Score Here" />
         <LeaderboardCard username="Username Here" score="Score Here" />
       </Container>
+      <Card className = {classes.playerCard} xs={3}>
+      <h2>Your position is (X) out of (Y USERS).</h2>
+        <CardContent>
+          <LeaderboardCard username = {firebase.getCurrentUsername()} score = "Score Here"></LeaderboardCard>
+        </CardContent>
+      </Card>
     </MuiThemeProvider>
   );
 }
