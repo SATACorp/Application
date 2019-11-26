@@ -1,0 +1,41 @@
+[debug] [2019-11-26T01:49:00.818Z] ----------------------------------------------------------------------
+[debug] [2019-11-26T01:49:00.819Z] Command:       /usr/local/bin/node /usr/local/bin/firebase emulators:start --only functions
+[debug] [2019-11-26T01:49:00.819Z] CLI Version:   7.8.1
+[debug] [2019-11-26T01:49:00.819Z] Platform:      darwin
+[debug] [2019-11-26T01:49:00.819Z] Node Version:  v12.13.0
+[debug] [2019-11-26T01:49:00.819Z] Time:          Mon Nov 25 2019 17:49:00 GMT-0800 (Pacific Standard Time)
+[debug] [2019-11-26T01:49:00.819Z] ----------------------------------------------------------------------
+[debug] [2019-11-26T01:49:00.819Z] 
+[info] i  emulators: Starting emulators: functions
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "12"
+[info] ✔  functions: Emulator started at http://localhost:5001
+[info] i  functions: Watching "/Users/amoghdave/Desktop/School Work - Senior Year/INFO 442/Git/Application/functions" for Cloud Functions...
+[debug] [2019-11-26T01:49:01.096Z] [worker-~diagnostic~-c45e6751-627e-4103-9a1e-c4dcfca8ff3d]: Assigning socketPath: /var/folders/m1/m4rr72d15018__bv6gvyq0mh0000gn/T/fire_emu_12139.sock
+[debug] [2019-11-26T01:49:01.096Z] [worker-~diagnostic~-c45e6751-627e-4103-9a1e-c4dcfca8ff3d]: BUSY
+[debug] [2019-11-26T01:49:01.254Z] [runtime-status] [12139] Functions runtime initialized. {"cwd":"/Users/amoghdave/Desktop/School Work - Senior Year/INFO 442/Git/Application/functions","node_version":"12.13.0"}
+[debug] [2019-11-26T01:49:01.254Z] [runtime-status] [12139] Disabled runtime features: undefined
+[debug] [2019-11-26T01:49:01.256Z] [runtime-status] [12139] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.8.0","resolution":"/Users/amoghdave/Desktop/School Work - Senior Year/INFO 442/Git/Application/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2019-11-26T01:49:01.256Z] [runtime-status] [12139] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"/Users/amoghdave/Desktop/School Work - Senior Year/INFO 442/Git/Application/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2019-11-26T01:49:01.357Z] [runtime-status] [12139] Found google-gax at /Users/amoghdave/Desktop/School Work - Senior Year/INFO 442/Git/Application/functions/node_modules/google-gax/build/src/index.js
+[debug] [2019-11-26T01:49:01.357Z] [runtime-status] [12139] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"},{"name":"google-gax","status":"mocked"}]
+[debug] [2019-11-26T01:49:01.377Z] [runtime-status] [12139] Checked functions.config() {"config":{}}
+[debug] [2019-11-26T01:49:01.378Z] [runtime-status] [12139] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"/Users/amoghdave/Desktop/School Work - Senior Year/INFO 442/Git/Application/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2019-11-26T01:49:01.379Z] [runtime-status] [12139] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.8.0","resolution":"/Users/amoghdave/Desktop/School Work - Senior Year/INFO 442/Git/Application/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2019-11-26T01:49:01.379Z] [runtime-status] [12139] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"/Users/amoghdave/Desktop/School Work - Senior Year/INFO 442/Git/Application/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2019-11-26T01:49:01.396Z] [runtime-status] [12139] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.8.0","resolution":"/Users/amoghdave/Desktop/School Work - Senior Year/INFO 442/Git/Application/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2019-11-26T01:49:01.397Z] [runtime-status] [12139] initializeApp(DEFAULT) {"databaseURL":"https://sendnews-acf7f.firebaseio.com","storageBucket":"sendnews-acf7f.appspot.com","projectId":"sendnews-acf7f"}
+[warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production.
+[warn] ⚠  ReferenceError: firebase is not defined
+    at Object.<anonymous> (/Users/amoghdave/Desktop/School Work - Senior Year/INFO 442/Git/Application/functions/index.js:14:13)
+    at Module._compile (internal/modules/cjs/loader.js:956:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:973:10)
+    at Module.load (internal/modules/cjs/loader.js:812:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:724:14)
+    at Module.require (internal/modules/cjs/loader.js:849:19)
+    at require (internal/modules/cjs/helpers.js:74:18)
+    at /usr/local/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:723:33
+    at Generator.next (<anonymous>)
+    at fulfilled (/usr/local/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:4:58)
+[warn] ⚠  We were unable to load your functions code. (see above)
+[debug] [2019-11-26T01:49:01.437Z] [worker-~diagnostic~-c45e6751-627e-4103-9a1e-c4dcfca8ff3d]: exited
+[debug] [2019-11-26T01:49:01.437Z] [worker-~diagnostic~-c45e6751-627e-4103-9a1e-c4dcfca8ff3d]: FINISHED

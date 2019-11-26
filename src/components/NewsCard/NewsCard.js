@@ -9,6 +9,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
 export default function NewsCard() {
+  var database = firebase.db;
+  var documentNumber = 1;
   const classes = useStyles();
   const [newsArticle, setNewsArticles] = useState();
 
@@ -24,6 +26,9 @@ export default function NewsCard() {
       });
   }, []);
 
+
+ writeNewsData("hello", "1", "www", "desc");
+
   useEffect(() => {
     logArticlesArray();
   }, []);
@@ -31,6 +36,14 @@ export default function NewsCard() {
   function logArticlesArray() {
     console.log(newsArticle);
   }
+  function writeNewsData(title, sourceName, imageURL, description) {
+    database.collection("baby").doc("Document2").set({
+    Name: "legend"
+  })
+  documentNumber++;
+  console.log("done!!!");
+}
+  
 
   if (newsArticle != null) {
     return (
