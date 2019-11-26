@@ -10,6 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import Card from "@material-ui/core/Card";
 
 function Login(props) {
   const classes = useStyles();
@@ -29,11 +30,7 @@ function Login(props) {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Typography component="h3" variant="h5">
-        SendNews
-      </Typography>
-      <div className={classes.paper}>
+      <Card className={classes.card}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -90,7 +87,7 @@ function Login(props) {
             </Grid>
           </Grid>
         </form>
-      </div>
+      </Card>
     </Container>
   );
 }

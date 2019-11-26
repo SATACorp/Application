@@ -7,6 +7,8 @@ import { Feed } from "../../components/Feed";
 import { Profile } from "../../components/Profile";
 import { Leaderboard } from "../../components/Leaderboard";
 import { Quizzes } from "../../components/Quizzes";
+import { QuizForm } from "../../components/QuizForm";
+import { Header } from "../../components/Header";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
 import firebase from "../../firebase";
@@ -66,6 +68,12 @@ function App() {
         path="/leaderboard"
         component={Leaderboard}
       />
+      <PrivateRoute
+        authed={loggedIn}
+        exact
+        path="/makequiz"
+        component={QuizForm}
+      />
     </>
   ) : (
     <div className={classes.loader}>
@@ -76,6 +84,7 @@ function App() {
   return firebaseInitialized !== false ? (
     <div className={classes.container}>
       <BrowserRouter>
+        <Header />
         <Switch>{routes}</Switch>
         <Navbar isLoggedIn={loggedIn} />
       </BrowserRouter>
