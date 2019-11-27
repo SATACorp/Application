@@ -45,6 +45,11 @@ export const useStyles = makeStyles(theme => ({
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
     maxWidth: "1024px"
+  },
+
+  boardPlacings: {
+    fontFamily:'Roboto',
+    fontSize:50
   }
 
 }));

@@ -6,5 +6,10 @@ export const useStyles = makeStyles(theme => ({
   img: {
     width:20,
     paddingRight: 20
+  }, 
+
+  username: {
+    position: 'right',
+    paddingLeft: 1085
   }
 }));

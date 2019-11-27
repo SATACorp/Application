@@ -39,6 +39,9 @@ function Profile(props) {
             Logout
           </Button>
         </CardContent>
+        <CardContent>
+          
+        </CardContent>
       </Card>
     </Container>
   );
