@@ -17,6 +17,7 @@ function Signup(props) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
 
   async function handleSubmit() {
     try {
@@ -78,6 +79,18 @@ function Signup(props) {
                 id="password"
                 autoComplete="current-password"
                 onChange={e => setPassword(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="photoURL"
+                label="Photo URL"
+                type="photoURL"
+                id="photoURL"
+                onChange={e => setPhotoURL(e.target.value)}
               />
             </Grid>
           </Grid>
