@@ -6,9 +6,11 @@ import Typography from "@material-ui/core/Typography";
 import firebase from "../../firebase";
 import Logo from "../../assets/Logo.png";
 import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
 
-export default function Header() {
+export default function Header(props) {
   const classes = useStyles();
+  
 
   return (
     <AppBar position="fixed" color="disabled" className={classes.container}>
@@ -18,6 +20,9 @@ export default function Header() {
         </CardMedia>
         <Typography variant="h6" className={classes.title}>
           SendNews
+        </Typography>
+        <Typography className = {classes.username}>
+          {firebase.getCurrentUsername()}: (Points total here)
         </Typography>
       </Toolbar>
     </AppBar>

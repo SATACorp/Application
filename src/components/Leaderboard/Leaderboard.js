@@ -42,8 +42,11 @@ export default function Leaderboard(props) {
     <MuiThemeProvider theme={theme}>
     <h1 className={classes.pageTitle}>All-Time Leaderboard</h1>
       <Container className={classes.container} component="main" maxWidth="xl">
+        <h1 className={classes.boardPlacings}>1.</h1>
         <LeaderboardCard username="Username Here" score="Score Here" />
+        <h1 className ={classes.boardPlacings}>2.</h1>
         <LeaderboardCard username="Username Here" score="Score Here" />
+        <h1 className={classes.boardPlacings}>3.</h1>
         <LeaderboardCard username="Username Here" score="Score Here" />
       </Container>
       <Card className = {classes.playerCard} xs={3}>
