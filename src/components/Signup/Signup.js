@@ -21,7 +21,7 @@ function Signup(props) {
 
   async function handleSubmit() {
     try {
-      await firebase.register(username, email, password);
+      await firebase.register(username, email, password, photoURL);
       props.setLoggedIn(true);
       props.history.replace("/feed");
     } catch (err) {
