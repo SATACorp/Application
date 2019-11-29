@@ -26,6 +26,7 @@ function Profile(props) {
   return (
     <Container className={classes.container}>
     <h1 className={classes.pageTitle}>Hello {firebase.getCurrentUsername()}</h1>
+    <img src = {firebase.getCurrentPhoto()}></img>
     <h2 className={classes.pageSubtitle}>Welcome to your profile!</h2>
       <Card>
         <CardContent>

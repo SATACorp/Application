@@ -21,9 +21,6 @@ export default function Header(props) {
         <Typography variant="h6" className={classes.title}>
           SendNews
         </Typography>
-        <Typography className = {classes.username}>
-          {firebase.getCurrentUsername()}: (Points total here)
-        </Typography>
       </Toolbar>
     </AppBar>
   );

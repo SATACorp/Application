@@ -55,6 +55,12 @@ class Firebase {
     }
   }
 
+  getCurrentPhoto() {
+    if (this.auth.currentUser) {
+      return this.auth.currentUser && this.auth.currentUser.photoURL;
+    }
+  }
+
   getCurrrentUID() {
     this.auth.onAuthStateChanged(user => {
       if (user) {
