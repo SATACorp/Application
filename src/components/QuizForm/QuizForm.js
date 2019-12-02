@@ -26,6 +26,7 @@ import Button from "@material-ui/core/Button";
 export default function QuizForm(props) {
   const classes = useStyles();
 
+  const [quizID, setQuizID] = useState(uuid());
   const [multipleChoiceQ1, setMultipleChoiceQ1] = useState();
   const [multipleChoiceQ1Answer, setMultipleChoiceQ1Answer] = useState();
   const [multipleChoiceQ1Wrong1, setMultipleChoiceQ1Wrong1] = useState();
@@ -44,8 +45,9 @@ export default function QuizForm(props) {
     e.preventDefault();
     firebase.db
       .collection("quizzes")
-      .doc(uuid())
+      .doc(quizID)
       .set({
+        uid: quizID,
         articleURL: props.articleURL,
         articleTitle: props.articleTitle,
         multipleChoiceQ1: multipleChoiceQ1,
