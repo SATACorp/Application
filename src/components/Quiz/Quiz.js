@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useStyles } from "./styles";
+import firebase from "../../firebase";
+import { TakeQuiz } from "../TakeQuiz";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -38,6 +40,15 @@ export default function Quiz(props) {
   // updates user points
   // }
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <Card className={classes.container}>
       <CardMedia>
@@ -48,7 +59,16 @@ export default function Quiz(props) {
           <Typography component="h5" variant="h5">
             {props.quizName}
           </Typography>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            onClick={handleClickOpen}
+          >
+            Take Quiz
+          </Button>
         </CardContent>
+        <TakeQuiz open={open} handleClose={handleClose} />
       </div>
     </Card>
   );

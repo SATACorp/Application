@@ -1,31 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useStyles } from "./styles";
 import { QuizForm } from "../QuizForm";
 import { Quiz } from "../Quiz";
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import firebase from "../../firebase";
+import { CircularProgress } from "@material-ui/core";
 
-export default function Quizzes() {
-  // Functions necessary for quiz retrieval
-
-  // const getQuizzes = () => {
-  //  API / database call
-  // }
-  //
-  // const makeQuizList = () => {
-  // create JSX element of quiz list
-  // }
-
+export default function Quizzes(props) {
   function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+    const { children, value, index, ...other } = props;
 
-  return (
-    <Typography
+    return (
+      <Typography
         component="div"
         role="tabpanel"
         hidden={value !== index}
@@ -41,50 +33,71 @@ export default function Quizzes() {
   TabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired
   };
 
   function a11yProps(index) {
     return {
       id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`
     };
   }
 
+  // Quizzes
+
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+  const [quizzes, setQuizzes] = useState();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  useEffect(() => {
+    let quizData = [];
+    firebase.db
+      .collection("quizzes")
+      .get()
+      .then(function(snapshot) {
+        snapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          quizData.push(doc.data());
+        });
+        setQuizzes(quizData);
+      });
+  }, []);
+
+  let quizCards;
+
+  if (quizzes != null) {
+    quizCards = quizzes.map((data, index) => (
+      <Quiz quizName={data.articleTitle} />
+    ));
+  } else {
+    return (
+      <div className={classes.loader}>
+        <CircularProgress />
+      </div>
+    );
+  }
+
   return (
     <div className={classes.container}>
-      <h2 class={classes.pageTitle}>Quizzes</h2>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          >
-          <Tab label="New" {...a11yProps(0)} />
-          <Tab label="Completed" {...a11yProps(1)} />
-          <Tab label="Yours" {...a11yProps(2)} />
-        </Tabs>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        indicatorColor="primary"
+        textColor="primary"
+      >
+        <Tab label="New" {...a11yProps(0)} />
+        <Tab label="Completed" {...a11yProps(1)} />
+        <Tab label="Yours" {...a11yProps(2)} />
+      </Tabs>
       <TabPanel value={value} index={0}>
-        <Quiz quizName={"Quiz Name Here"} />
-        <Quiz quizName={"Quiz Name Here"} />
-        <Quiz quizName={"Quiz Name Here"} />
-        <Quiz quizName={"Quiz Name Here"} />
-        <Quiz quizName={"Quiz Name Here"} />
+        {quizCards}
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        <Quiz quizName={"Quiz Name Here"} />
-        <Quiz quizName={"Quiz Name Here"} />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <Quiz quizName={"Quiz Name Here"} />
-      </TabPanel>
+      <TabPanel value={value} index={1}></TabPanel>
+      <TabPanel value={value} index={2}></TabPanel>
     </div>
   );
 }

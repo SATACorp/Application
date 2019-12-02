@@ -9,5 +9,8 @@ export const useStyles = makeStyles(theme => ({
   img: {
     height: 80,
     padding: theme.spacing(1)
+  },
+  button: {
+    margin: theme.spacing(1)
   }
 }));
