@@ -9,19 +9,13 @@ import Grid from "@material-ui/core/Grid";
 import DoneOutlineIcon from "@material-ui/icons/DoneOutline";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/icons/Add";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import Radio from "@material-ui/core/Radio";
 
 export default function QuizForm(props) {
   const classes = useStyles();
@@ -40,6 +34,13 @@ export default function QuizForm(props) {
   const [trueFalseQ, setTrueFalseQ] = useState();
   const [trueFalseQAnswer, setTrueFalseQAnswer] = useState();
   const [trueFalseQWrong, setTrueFalseQWrong] = useState();
+
+  const handleTrueFalse = val => {
+    setTrueFalseQAnswer(val);
+    if (
+      val === "true" ? setTrueFalseQWrong("false") : setTrueFalseQWrong("true")
+    );
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -255,30 +256,23 @@ export default function QuizForm(props) {
             <div className={classes.margin}>
               <Grid container spacing={1} alignItems="flex-end">
                 <Grid item>
-                  <DoneOutlineIcon color="primary" />
-                </Grid>
-                <Grid item>
-                  <TextField
-                    id="input-with-icon-grid"
-                    label="Correct Answer"
-                    onChange={e => setTrueFalseQAnswer(e.target.value)}
-                    required
-                  />
-                </Grid>
-              </Grid>
-            </div>
-            <div className={classes.margin}>
-              <Grid container spacing={1} alignItems="flex-end">
-                <Grid item>
-                  <HighlightOffIcon color="secondary" />
-                </Grid>
-                <Grid item>
-                  <TextField
-                    id="input-with-icon-grid"
-                    label="Wrong Answer"
-                    onChange={e => setTrueFalseQWrong(e.target.value)}
-                    required
-                  />
+                  <RadioGroup
+                    aria-label="true-false-question"
+                    name="true-false-question"
+                    // value={value}
+                    onChange={e => handleTrueFalse(e.target.value)}
+                  >
+                    <FormControlLabel
+                      value="true"
+                      control={<Radio />}
+                      label="True"
+                    />
+                    <FormControlLabel
+                      value="false"
+                      control={<Radio />}
+                      label="False"
+                    />
+                  </RadioGroup>
                 </Grid>
               </Grid>
             </div>

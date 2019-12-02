@@ -21,7 +21,6 @@ export default function Feed() {
         snapshot.forEach(function(doc) {
           // doc.data() is never undefined for query doc snapshots
           articles.push(doc.data());
-          console.log(doc.data().url);
         });
         setNewsArticles(articles);
       });

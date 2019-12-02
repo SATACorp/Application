@@ -68,7 +68,7 @@ export default function Quiz(props) {
             Take Quiz
           </Button>
         </CardContent>
-        <TakeQuiz open={open} handleClose={handleClose} />
+        <TakeQuiz open={open} handleClose={handleClose} quizID={props.quizID} />
       </div>
     </Card>
   );

@@ -8,9 +8,12 @@ export const useStyles = makeStyles(theme => ({
       margin: theme.spacing(1)
     }
   },
+  button: {
+    margin: theme.spacing(1)
+  },
   card: {
     maxWidth: 500,
-    margin: 25
+    margin: 15
   },
   media: {
     height: 0,

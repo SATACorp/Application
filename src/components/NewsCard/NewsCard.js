@@ -16,6 +16,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
+
 import { QuizForm } from "../QuizForm";
 
 export default function NewsCard(props) {
@@ -38,10 +39,24 @@ export default function NewsCard(props) {
         <Typography variant="body2" color="textSecondary" component="p">
           {props.description}
         </Typography>
-        <div className={classes.button} onClick={handleClickOpen}>
-          <Fab color="primary" aria-label="add">
-            <AddIcon />
-          </Fab>
+        <div className={classes.buttons}>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            href={props.url}
+            target="_blank"
+          >
+            Read Article
+          </Button>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            onClick={handleClickOpen}
+          >
+            Make Quiz
+          </Button>
         </div>
         <QuizForm
           open={open}

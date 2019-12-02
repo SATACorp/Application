@@ -71,7 +71,7 @@ export default function Quizzes(props) {
 
   if (quizzes != null) {
     quizCards = quizzes.map((data, index) => (
-      <Quiz quizName={data.articleTitle} />
+      <Quiz quizName={data.articleTitle} quizID={data.uid} />
     ));
   } else {
     return (
