@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useStyles } from "./styles";
-import { QuizForm } from "../QuizForm";
 import { Quiz } from "../Quiz";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import firebase from "../../firebase";
