@@ -25,6 +25,23 @@ export default function TakeQuiz(props) {
   const [quizPoints, setQuizPoints] = useState();
 
   useEffect(() => {
+    var docRef = firebase.db.collection("quizzes").doc(props.quizID);
+    docRef
+      .get()
+      .then(function(doc) {
+        if (doc.exists) {
+          setQuiz(doc.data());
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      })
+      .catch(function(error) {
+        console.log("Error getting document:", error);
+      });
+  }, []);
+
+  useEffect(() => {
     const username = firebase.getCurrentUsername();
     firebase.db
       .collection("users")
@@ -42,23 +59,6 @@ export default function TakeQuiz(props) {
   const handleClose = () => {
     setOpenResults(false);
   };
-
-  useEffect(() => {
-    var docRef = firebase.db.collection("quizzes").doc(props.quizID);
-    docRef
-      .get()
-      .then(function(doc) {
-        if (doc.exists) {
-          setQuiz(doc.data());
-        } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-        }
-      })
-      .catch(function(error) {
-        console.log("Error getting document:", error);
-      });
-  }, []);
 
   const handleSubmit = () => {
     handleClickOpen(true);
