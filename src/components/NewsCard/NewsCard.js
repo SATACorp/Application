@@ -52,7 +52,7 @@ export default function NewsCard(props) {
           <Button
             className={classes.button}
             variant="contained"
-            color="primary"
+            color="secondary"
             onClick={handleClickOpen}
           >
             Make Quiz

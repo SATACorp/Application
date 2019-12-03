@@ -26,5 +26,8 @@ export const useStyles = makeStyles(theme => ({
     color:"white",
     fontFamily:"Roboto",
     fontSize: 35
+  },
+  profilePic: {
+    width: "50%"
   }
 }));
