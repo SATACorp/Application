@@ -61,12 +61,10 @@ class Firebase {
     }
   }
 
-  getCurrrentUID() {
+  getCurrentUID() {
     this.auth.onAuthStateChanged(user => {
       if (user) {
-        if (this.auth.currentUser && this.auth.currentUser.uid) {
-          return this.auth.currentUser.uid;
-        }
+        return user.uid;
       }
     });
   }
@@ -78,6 +76,16 @@ class Firebase {
       }
     });
     return false;
+  }
+
+  updatePoints(score) {
+    const username = this.getCurrentUsername();
+    this.db
+      .collection("users")
+      .doc(username)
+      .set({
+        points: this.getScore() + score
+      });
   }
 }
 

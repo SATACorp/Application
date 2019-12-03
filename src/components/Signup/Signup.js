@@ -23,6 +23,16 @@ function Signup(props) {
     try {
       await firebase.register(username, email, password, photoURL);
       props.setLoggedIn(true);
+      firebase.db
+        .collection("users")
+        .doc(username)
+        .set({
+          points: 0,
+          picURL: photoURL
+        })
+        .catch(function(error) {
+          console.error("Error writing document: ", error);
+        });
       props.history.replace("/feed");
     } catch (err) {
       alert(err.message);

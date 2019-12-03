@@ -22,18 +22,10 @@ export default function TakeQuiz(props) {
   const [answer3, setAnswer3] = useState();
 
   const [openResults, setOpenResults] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpenResults(true);
-  };
-
-  const handleClose = () => {
-    setOpenResults(false);
-  };
+  const [quizPoints, setQuizPoints] = useState();
 
   useEffect(() => {
     var docRef = firebase.db.collection("quizzes").doc(props.quizID);
-
     docRef
       .get()
       .then(function(doc) {
@@ -49,9 +41,39 @@ export default function TakeQuiz(props) {
       });
   }, []);
 
+  useEffect(() => {
+    const username = firebase.getCurrentUsername();
+    firebase.db
+      .collection("users")
+      .doc(username)
+      .get()
+      .then(function(response) {
+        setQuizPoints(response.data().points);
+      });
+  }, [quizPoints]);
+
+  const handleClickOpen = () => {
+    setOpenResults(true);
+  };
+
+  const handleClose = () => {
+    setOpenResults(false);
+  };
+
   const handleSubmit = () => {
     handleClickOpen(true);
     props.handleClose();
+    updatePoints(getScore());
+  };
+
+  const updatePoints = score => {
+    const username = firebase.getCurrentUsername();
+    firebase.db
+      .collection("users")
+      .doc(username)
+      .set({
+        points: quizPoints + score
+      });
   };
 
   const getScore = () => {
@@ -98,28 +120,7 @@ export default function TakeQuiz(props) {
     }
   };
 
-  const resultDialog = () => {
-    return (
-      <Dialog
-        open={openResults}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        {getResultBox(answer1, quiz.multipleChoiceQ1Answer)}
-        {getResultBox(answer2, quiz.multipleChoiceQ2Answer)}
-        {getResultBox(answer3, quiz.trueFalseQAnswer)}
-        <DialogContent>
-          <Grid container spacing={1} alignItems="flex-end">
-            <Grid item>
-              <DialogContentText>{`You Scored ${getScore()} Points`}</DialogContentText>
-            </Grid>
-          </Grid>
-        </DialogContent>
-      </Dialog>
-    );
-  };
-
-  let question1RadioGroup = () => {
+  const question1RadioGroup = () => {
     const answer = (
       <FormControlLabel
         value={quiz.multipleChoiceQ1Answer}
@@ -152,9 +153,8 @@ export default function TakeQuiz(props) {
       />
     );
 
-    let radioGroup = shuffleArray([answer, wrong1, wrong2, wrong3]);
+    const radioGroup = shuffleArray([answer, wrong1, wrong2, wrong3]);
 
-    console.log(radioGroup);
     return (
       <RadioGroup
         aria-label="question1"
@@ -169,15 +169,54 @@ export default function TakeQuiz(props) {
     );
   };
 
-  function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-    }
-    return array;
-  }
+  const question2RadioGroup = () => {
+    const answer = (
+      <FormControlLabel
+        value={quiz.multipleChoiceQ2Answer}
+        control={<Radio />}
+        label={quiz.multipleChoiceQ2Answer}
+      />
+    );
+
+    const wrong1 = (
+      <FormControlLabel
+        value={quiz.multipleChoiceQ2Wrong1}
+        control={<Radio />}
+        label={quiz.multipleChoiceQ2Wrong1}
+      />
+    );
+
+    const wrong2 = (
+      <FormControlLabel
+        value={quiz.multipleChoiceQ2Wrong2}
+        control={<Radio />}
+        label={quiz.multipleChoiceQ2Wrong2}
+      />
+    );
+
+    const wrong3 = (
+      <FormControlLabel
+        value={quiz.multipleChoiceQ2Wrong3}
+        control={<Radio />}
+        label={quiz.multipleChoiceQ2Wrong3}
+      />
+    );
+
+    const radioGroup = shuffleArray([answer, wrong1, wrong2, wrong3]);
+
+    return (
+      <RadioGroup
+        aria-label="question2"
+        name="question2"
+        // value={value}
+        onChange={e => setAnswer2(e.target.value)}
+      >
+        {radioGroup.map(radio => {
+          return radio;
+        })}
+      </RadioGroup>
+    );
+  };
 
   return (
     <>
@@ -191,40 +230,13 @@ export default function TakeQuiz(props) {
             <DialogContentText>
               <h3>{quiz.multipleChoiceQ1}</h3>
             </DialogContentText>
-
             {question1RadioGroup()}
           </FormControl>
           <FormControl component="fieldset" className={classes.formControl}>
             <DialogContentText>
               <h3>{quiz.multipleChoiceQ2}</h3>
             </DialogContentText>
-            <RadioGroup
-              aria-label="question2"
-              name="question2"
-              // value={value}
-              onChange={e => setAnswer2(e.target.value)}
-            >
-              <FormControlLabel
-                value={quiz.multipleChoiceQ2Answer}
-                control={<Radio />}
-                label={quiz.multipleChoiceQ2Answer}
-              />
-              <FormControlLabel
-                value={quiz.multipleChoiceQ2Wrong1}
-                control={<Radio />}
-                label={quiz.multipleChoiceQ2Wrong1}
-              />
-              <FormControlLabel
-                value={quiz.multipleChoiceQ2Wrong2}
-                control={<Radio />}
-                label={quiz.multipleChoiceQ2Wrong2}
-              />
-              <FormControlLabel
-                value={quiz.multipleChoiceQ2Wrong3}
-                control={<Radio />}
-                label={quiz.multipleChoiceQ2Wrong3}
-              />
-            </RadioGroup>
+            {question2RadioGroup()}
           </FormControl>
           <FormControl component="fieldset" className={classes.formControl}>
             <DialogContentText>
@@ -276,4 +288,14 @@ export default function TakeQuiz(props) {
       </Dialog>
     </>
   );
+}
+
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
 }
