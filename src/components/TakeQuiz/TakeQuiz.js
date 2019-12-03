@@ -120,7 +120,7 @@ export default function TakeQuiz(props) {
     }
   };
 
-  let question1RadioGroup = () => {
+  const question1RadioGroup = () => {
     const answer = (
       <FormControlLabel
         value={quiz.multipleChoiceQ1Answer}
@@ -153,7 +153,7 @@ export default function TakeQuiz(props) {
       />
     );
 
-    let radioGroup = shuffleArray([answer, wrong1, wrong2, wrong3]);
+    const radioGroup = shuffleArray([answer, wrong1, wrong2, wrong3]);
 
     return (
       <RadioGroup
@@ -169,15 +169,54 @@ export default function TakeQuiz(props) {
     );
   };
 
-  function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-    }
-    return array;
-  }
+  const question2RadioGroup = () => {
+    const answer = (
+      <FormControlLabel
+        value={quiz.multipleChoiceQ2Answer}
+        control={<Radio />}
+        label={quiz.multipleChoiceQ2Answer}
+      />
+    );
+
+    const wrong1 = (
+      <FormControlLabel
+        value={quiz.multipleChoiceQ2Wrong1}
+        control={<Radio />}
+        label={quiz.multipleChoiceQ2Wrong1}
+      />
+    );
+
+    const wrong2 = (
+      <FormControlLabel
+        value={quiz.multipleChoiceQ2Wrong2}
+        control={<Radio />}
+        label={quiz.multipleChoiceQ2Wrong2}
+      />
+    );
+
+    const wrong3 = (
+      <FormControlLabel
+        value={quiz.multipleChoiceQ2Wrong3}
+        control={<Radio />}
+        label={quiz.multipleChoiceQ2Wrong3}
+      />
+    );
+
+    const radioGroup = shuffleArray([answer, wrong1, wrong2, wrong3]);
+
+    return (
+      <RadioGroup
+        aria-label="question2"
+        name="question2"
+        // value={value}
+        onChange={e => setAnswer2(e.target.value)}
+      >
+        {radioGroup.map(radio => {
+          return radio;
+        })}
+      </RadioGroup>
+    );
+  };
 
   return (
     <>
@@ -191,40 +230,13 @@ export default function TakeQuiz(props) {
             <DialogContentText>
               <h3>{quiz.multipleChoiceQ1}</h3>
             </DialogContentText>
-
             {question1RadioGroup()}
           </FormControl>
           <FormControl component="fieldset" className={classes.formControl}>
             <DialogContentText>
               <h3>{quiz.multipleChoiceQ2}</h3>
             </DialogContentText>
-            <RadioGroup
-              aria-label="question2"
-              name="question2"
-              // value={value}
-              onChange={e => setAnswer2(e.target.value)}
-            >
-              <FormControlLabel
-                value={quiz.multipleChoiceQ2Answer}
-                control={<Radio />}
-                label={quiz.multipleChoiceQ2Answer}
-              />
-              <FormControlLabel
-                value={quiz.multipleChoiceQ2Wrong1}
-                control={<Radio />}
-                label={quiz.multipleChoiceQ2Wrong1}
-              />
-              <FormControlLabel
-                value={quiz.multipleChoiceQ2Wrong2}
-                control={<Radio />}
-                label={quiz.multipleChoiceQ2Wrong2}
-              />
-              <FormControlLabel
-                value={quiz.multipleChoiceQ2Wrong3}
-                control={<Radio />}
-                label={quiz.multipleChoiceQ2Wrong3}
-              />
-            </RadioGroup>
+            {question2RadioGroup()}
           </FormControl>
           <FormControl component="fieldset" className={classes.formControl}>
             <DialogContentText>
@@ -276,4 +288,14 @@ export default function TakeQuiz(props) {
       </Dialog>
     </>
   );
+}
+
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
 }
