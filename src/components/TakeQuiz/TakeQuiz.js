@@ -22,6 +22,18 @@ export default function TakeQuiz(props) {
   const [answer3, setAnswer3] = useState();
 
   const [openResults, setOpenResults] = useState(false);
+  const [quizPoints, setQuizPoints] = useState();
+
+  useEffect(() => {
+    const username = firebase.getCurrentUsername();
+    firebase.db
+      .collection("users")
+      .doc(username)
+      .get()
+      .then(function(response) {
+        setQuizPoints(response.data().points);
+      });
+  }, [quizPoints]);
 
   const handleClickOpen = () => {
     setOpenResults(true);
@@ -51,7 +63,17 @@ export default function TakeQuiz(props) {
   const handleSubmit = () => {
     handleClickOpen(true);
     props.handleClose();
-    firebase.updatePoints(getScore());
+    updatePoints(getScore());
+  };
+
+  const updatePoints = score => {
+    const username = firebase.getCurrentUsername();
+    firebase.db
+      .collection("users")
+      .doc(username)
+      .set({
+        points: quizPoints + score
+      });
   };
 
   const getScore = () => {
