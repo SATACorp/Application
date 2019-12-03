@@ -78,17 +78,6 @@ class Firebase {
     return false;
   }
 
-  getScore() {
-    const username = this.getCurrentUsername();
-    this.db
-      .collection("users")
-      .doc(username)
-      .get()
-      .then(function(snapshot) {
-        return snapshot.data().points;
-      });
-  }
-
   updatePoints(score) {
     const username = this.getCurrentUsername();
     this.db

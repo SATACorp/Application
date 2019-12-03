@@ -11,7 +11,7 @@ export default function LeaderboardCard(props) {
   return (
     <Card className={classes.container}>
       <CardMedia>
-        <img src={require("../../assets/Logo.png")} className={classes.img} />
+        <img src={props.photo} className={classes.img} />
       </CardMedia>
       <div className={classes.details}>
         <CardContent className={classes.content}>

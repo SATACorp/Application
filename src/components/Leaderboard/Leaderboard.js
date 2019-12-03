@@ -1,19 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useStyles } from "./styles";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import Logo from "../../assets/Logo.png";
-import { flexbox } from "@material-ui/system";
-import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import IconButton from "@material-ui/core/IconButton";
-import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
-import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import SkipNextIcon from "@material-ui/icons/SkipNext";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { LeaderboardCard } from "../LeaderboardCard";
 import firebase from "../../firebase";
@@ -35,6 +24,19 @@ export default function Leaderboard(props) {
   // })
   // }
 
+  const [points, setPoints] = useState();
+
+  useEffect(() => {
+    const username = firebase.getCurrentUsername();
+    firebase.db
+      .collection("users")
+      .doc(username)
+      .get()
+      .then(function(response) {
+        setPoints(response.data().points);
+      });
+  }, []);
+
   const classes = useStyles();
   const theme = createMuiTheme();
 
@@ -54,7 +56,8 @@ export default function Leaderboard(props) {
         <CardContent>
           <LeaderboardCard
             username={firebase.getCurrentUsername()}
-            score={firebase.getScore()}
+            score={points}
+            photo={firebase.getCurrentPhoto()}
           ></LeaderboardCard>
         </CardContent>
       </Card>
