@@ -33,7 +33,6 @@ export default function TakeQuiz(props) {
 
   useEffect(() => {
     var docRef = firebase.db.collection("quizzes").doc(props.quizID);
-
     docRef
       .get()
       .then(function(doc) {
@@ -52,6 +51,7 @@ export default function TakeQuiz(props) {
   const handleSubmit = () => {
     handleClickOpen(true);
     props.handleClose();
+    firebase.updatePoints(getScore());
   };
 
   const getScore = () => {
@@ -98,27 +98,6 @@ export default function TakeQuiz(props) {
     }
   };
 
-  const resultDialog = () => {
-    return (
-      <Dialog
-        open={openResults}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        {getResultBox(answer1, quiz.multipleChoiceQ1Answer)}
-        {getResultBox(answer2, quiz.multipleChoiceQ2Answer)}
-        {getResultBox(answer3, quiz.trueFalseQAnswer)}
-        <DialogContent>
-          <Grid container spacing={1} alignItems="flex-end">
-            <Grid item>
-              <DialogContentText>{`You Scored ${getScore()} Points`}</DialogContentText>
-            </Grid>
-          </Grid>
-        </DialogContent>
-      </Dialog>
-    );
-  };
-
   let question1RadioGroup = () => {
     const answer = (
       <FormControlLabel
@@ -154,7 +133,6 @@ export default function TakeQuiz(props) {
 
     let radioGroup = shuffleArray([answer, wrong1, wrong2, wrong3]);
 
-    console.log(radioGroup);
     return (
       <RadioGroup
         aria-label="question1"

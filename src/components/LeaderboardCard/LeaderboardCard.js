@@ -1,10 +1,6 @@
 import React from "react";
 import { useStyles } from "./styles";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Logo from "../../assets/Logo.png";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";

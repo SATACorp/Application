@@ -5,13 +5,13 @@ import Button from "@material-ui/core/Button";
 import firebase from "../../firebase";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-import { createMuiTheme } from '@material-ui/core/styles';
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
 import { LeaderboardCard } from "../LeaderboardCard";
 
 function Profile(props) {
@@ -25,13 +25,20 @@ function Profile(props) {
 
   return (
     <Container className={classes.container}>
-    <h1 className={classes.pageTitle}>Hello {firebase.getCurrentUsername()}</h1>
-    <img src = {firebase.getCurrentPhoto()}></img>
-    <h2 className={classes.pageSubtitle}>Welcome to your profile!</h2>
+      <h1 className={classes.pageTitle}>
+        Hello {firebase.getCurrentUsername()}
+      </h1>
+      <img src={firebase.getCurrentPhoto()}></img>
+      <h2 className={classes.pageSubtitle}>Welcome to your profile!</h2>
       <Card>
         <CardContent>
-          <LeaderboardCard username = {firebase.getCurrentUsername()} score = "Score Here"></LeaderboardCard>
-          <h2 className = {classes.userCard}>Your position on the leaderboard is (X) out of (Y USERS).</h2>
+          <LeaderboardCard
+            username={firebase.getCurrentUsername()}
+            score={firebase.getScore()}
+          ></LeaderboardCard>
+          <h2 className={classes.userCard}>
+            Your position on the leaderboard is (X) out of (Y USERS).
+          </h2>
           <Button
             variant="contained"
             className={classes.button}
@@ -40,9 +47,7 @@ function Profile(props) {
             Logout
           </Button>
         </CardContent>
-        <CardContent>
-          
-        </CardContent>
+        <CardContent></CardContent>
       </Card>
     </Container>
   );
