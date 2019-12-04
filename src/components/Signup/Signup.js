@@ -27,8 +27,19 @@ function Signup(props) {
         .collection("users")
         .doc(username)
         .set({
-          points: 0,
+          points: 30,
           picURL: photoURL
+        })
+        .catch(function(error) {
+          console.error("Error writing document: ", error);
+        });
+      firebase.db
+        .collection("users")
+        .doc(username)
+        .collection("quizzesTaken")
+        .doc("0781963e-0b72-4315-9600-6bb34f404285")
+        .set({
+          id: "0781963e-0b72-4315-9600-6bb34f404285"
         })
         .catch(function(error) {
           console.error("Error writing document: ", error);

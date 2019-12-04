@@ -16,7 +16,7 @@ export default function Quizzes(props) {
   const [value, setValue] = useState(0);
   const [newQuizzes, setNewQuizzes] = useState();
   const [completedQuizzes, setCompletedQuizzes] = useState();
-  const [madeQuizzes, setMadeQuizzes] = useState();
+  const [madeQuizzes, setMadeQuizzes] = useState([]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -24,10 +24,10 @@ export default function Quizzes(props) {
 
   // Gets Different Quiz Categories
   useEffect(() => {
-    getCompletedQuizzes();
+    getQuizzes();
   }, []);
 
-  const getCompletedQuizzes = () => {
+  const getQuizzes = () => {
     let completedIDs = [];
     const username = firebase.getCurrentUsername();
     firebase.db
@@ -39,7 +39,6 @@ export default function Quizzes(props) {
         snapshot.forEach(function(doc) {
           completedIDs.push(doc.data().id);
         });
-
         return completedIDs;
       })
       .then(IDs => {
@@ -50,6 +49,7 @@ export default function Quizzes(props) {
             .doc(IDs[i])
             .get()
             .then(function(snapshot) {
+              console.log(IDs[i]);
               completedQuizData.push(snapshot.data());
             });
           setCompletedQuizzes(completedQuizData);
@@ -57,6 +57,7 @@ export default function Quizzes(props) {
         return completedQuizData;
       })
       .then(completed => {
+        console.log(completedQuizzes);
         let madeQuizIDs = [];
         firebase.db
           .collection("users")
@@ -67,47 +68,50 @@ export default function Quizzes(props) {
             snapshot.forEach(function(doc) {
               madeQuizIDs.push(doc.data().id);
             });
+            return [completed, madeQuizIDs];
+          })
+          .then(completedData => {
+            let newQuizData = [];
+            firebase.db
+              .collection("quizzes")
+              .get()
+              .then(function(snapshot) {
+                snapshot.forEach(function(doc) {
+                  if (
+                    !alreadyCompleted(completedData[0], doc.data()) &&
+                    !completedData[1].includes(doc.data().id)
+                  ) {
+                    newQuizData.push(doc.data());
+                  }
+                });
+                setNewQuizzes(newQuizData);
+                return completedData[1];
+              })
+              .then(data => {
+                let completedQuizData = [];
+                for (let i = 0; i < data.length; i++) {
+                  firebase.db
+                    .collection("quizzes")
+                    .doc(data[i])
+                    .get()
+                    .then(function(snapshot) {
+                      completedQuizData.push(snapshot.data());
+                    });
+                  setMadeQuizzes(completedQuizData);
+                }
+              });
           });
-        return [completed, madeQuizIDs];
-      })
-      .then(quizData => {
-        let newQuizData = [];
-        firebase.db
-          .collection("quizzes")
-          .get()
-          .then(function(snapshot) {
-            let index = 0;
-            snapshot.forEach(function(doc) {
-              console.log(doc.data().uid);
-              if (
-                !isEquivalent(quizData[0], doc.data(), index) &&
-                !quizData[1].includes(doc.data().id) &&
-                index < quizData[0].length
-              ) {
-                newQuizData.push(doc.data());
-              }
-            });
-            setNewQuizzes(newQuizData);
-          });
-        return quizData[1];
-      })
-      .then(quizIDs => {
-        let completedQuizData = [];
-        for (let i = 0; i < quizIDs.length; i++) {
-          firebase.db
-            .collection("quizzes")
-            .doc(quizIDs[i])
-            .get()
-            .then(function(snapshot) {
-              completedQuizData.push(snapshot.data());
-            });
-          setMadeQuizzes(completedQuizData);
-        }
       });
   };
 
-  const isEquivalent = (a, b, index) => {
-    return a[index].uid == b.uid;
+  const alreadyCompleted = (a, b) => {
+    let contains = false;
+    for (let i = 0; i < a.length; i++) {
+      if (a[i].uid == b.uid) {
+        contains = true;
+      }
+    }
+    return contains;
   };
 
   let newQuizCards;
@@ -115,9 +119,17 @@ export default function Quizzes(props) {
   let madeQuizCards;
 
   if (newQuizzes != null) {
-    newQuizCards = newQuizzes.map(data => (
-      <Quiz quizName={data.articleTitle} quizID={data.uid} key={data.uid} />
-    ));
+    if (newQuizzes.length == 0) {
+      newQuizCards = (
+        <div>
+          <h2>No New Quizzes</h2>
+        </div>
+      );
+    } else {
+      newQuizCards = newQuizzes.map(data => (
+        <Quiz quizName={data.articleTitle} quizID={data.uid} key={data.uid} />
+      ));
+    }
   } else {
     newQuizCards = (
       <div className={classes.loader}>
@@ -127,14 +139,22 @@ export default function Quizzes(props) {
   }
 
   if (completedQuizzes != null) {
-    completedQuizCards = completedQuizzes.map(data => (
-      <Quiz
-        quizName={data.articleTitle}
-        quizID={data.uid}
-        key={data.uid}
-        completed={true}
-      />
-    ));
+    if (completedQuizzes.length == 0) {
+      completedQuizCards = (
+        <div>
+          <h2>No Completed Quizzes</h2>
+        </div>
+      );
+    } else {
+      completedQuizCards = completedQuizzes.map(data => (
+        <Quiz
+          quizName={data.articleTitle}
+          quizID={data.uid}
+          key={data.uid}
+          completed={true}
+        />
+      ));
+    }
   } else {
     completedQuizCards = (
       <div className={classes.loader}>
@@ -144,14 +164,22 @@ export default function Quizzes(props) {
   }
 
   if (madeQuizzes != null) {
-    madeQuizCards = madeQuizzes.map(data => (
-      <Quiz
-        quizName={data.articleTitle}
-        quizID={data.uid}
-        key={data.uid}
-        completed={true}
-      />
-    ));
+    if (madeQuizzes.length == 0) {
+      madeQuizCards = (
+        <div>
+          <h2>You Haven't Created Any Quizzes</h2>
+        </div>
+      );
+    } else {
+      madeQuizCards = madeQuizzes.map(data => (
+        <Quiz
+          quizName={data.articleTitle}
+          quizID={data.uid}
+          key={data.uid}
+          completed={true}
+        />
+      ));
+    }
   } else {
     madeQuizCards = (
       <div className={classes.loader}>
