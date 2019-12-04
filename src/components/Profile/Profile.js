@@ -12,6 +12,8 @@ import { LeaderboardCard } from "../LeaderboardCard";
 function Profile(props) {
   const classes = useStyles();
   const [points, setPoints] = useState();
+  const [rank, setRank] = useState();
+  const [count, setCount] = useState();
 
   const handleLogout = () => {
     firebase.logout();
@@ -30,6 +32,25 @@ function Profile(props) {
       });
   }, []);
 
+  useEffect(() => {
+    const userData = [];
+    firebase.db
+      .collection("users")
+      .orderBy("points", "desc")
+      .get()
+      .then(function(querySnapshot) {
+        let count = 0;
+        querySnapshot.forEach(function(doc) {
+          count++;
+          if (firebase.getCurrentUsername() === doc.data().username) {
+            setRank(count);
+          }
+          userData.push(doc.data());
+        });
+        setCount(count);
+      });
+  }, []);
+
   return (
     <Container className={classes.container}>
       <Card>
@@ -40,7 +61,7 @@ function Profile(props) {
             photo={firebase.getCurrentPhoto()}
           ></LeaderboardCard>
           <h2 className={classes.userCard}>
-            Your position on the leaderboard is (X) out of (Y USERS).
+            {`Your position on the leaderboard is ${rank} out of ${count} users`}
           </h2>
           <Button
             variant="contained"

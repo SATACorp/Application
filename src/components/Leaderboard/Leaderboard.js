@@ -6,25 +6,11 @@ import CardContent from "@material-ui/core/CardContent";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { LeaderboardCard } from "../LeaderboardCard";
 import firebase from "../../firebase";
+import { CircularProgress } from "@material-ui/core";
 
 export default function Leaderboard(props) {
-  // Pre-condition: 1 or more users exist
-  // Post-condition: Sorts and displays top 3 users highest to lowest, keeping in account the user's
-  // score. If user is not a part of top 3 users, their ranking is displayed underneath the leaderboard with their points total.
-  // const getTopScores = () => {
-  //   call to LeaderBoardModel in database
-  // return scores;
-  // }
-
-  // pre: scores have been parsed with getTopScores function
-  // post: returns JSX element of Leaderboard list
-  // const createLeaderboard = (scores) => {
-  //  scores.map(score => {
-  //  return <div>score.player</div>;
-  // })
-  // }
-
   const [points, setPoints] = useState();
+  const [users, setUsers] = useState();
 
   useEffect(() => {
     const username = firebase.getCurrentUsername();
@@ -37,17 +23,53 @@ export default function Leaderboard(props) {
       });
   }, []);
 
+  useEffect(() => {
+    const userData = [];
+    firebase.db
+      .collection("users")
+      .orderBy("points", "desc")
+      .limit(10)
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          userData.push(doc.data());
+        });
+        setUsers(userData);
+      });
+  }, []);
+
   const classes = useStyles();
   const theme = createMuiTheme();
+
+  const topUsers = () => {
+    let leaderboardCards;
+    if (users != null) {
+      leaderboardCards = users.map((user, index) => {
+        return (
+          <LeaderboardCard
+            username={user.username}
+            score={user.points}
+            className={classes.cards}
+            photo={user.picURL}
+            rank={index + 1}
+            key={index}
+          />
+        );
+      });
+    } else {
+      leaderboardCards = (
+        <div className={classes.loader}>
+          <CircularProgress />
+        </div>
+      );
+    }
+    return leaderboardCards;
+  };
 
   return (
     <MuiThemeProvider theme={theme}>
       <h1 className={classes.pageTitle}>All-Time Leaderboard</h1>
-      <Container className={classes.flex}>
-        <LeaderboardCard username="Username Here" score="Score Here" className={classes.cards} />
-        <LeaderboardCard username="Username Here" score="Score Here" className={classes.cards}/>
-        <LeaderboardCard username="Username Here" score="Score Here" className={classes.cards} />
-      </Container>
+      <Container className={classes.flex}>{topUsers()}</Container>
     </MuiThemeProvider>
   );
 }

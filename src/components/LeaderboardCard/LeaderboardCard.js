@@ -10,9 +10,7 @@ export default function LeaderboardCard(props) {
 
   return (
     <Card className={classes.container}>
-      <Typography>
-        {props.score}
-      </Typography>
+      <Typography>{props.rank}</Typography>
       <CardMedia>
         <img src={props.photo} className={classes.img} />
       </CardMedia>
