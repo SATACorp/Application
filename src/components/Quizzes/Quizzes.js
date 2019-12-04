@@ -39,6 +39,7 @@ export default function Quizzes(props) {
         snapshot.forEach(function(doc) {
           completedIDs.push(doc.data().id);
         });
+
         return completedIDs;
       })
       .then(IDs => {
@@ -77,13 +78,14 @@ export default function Quizzes(props) {
           .then(function(snapshot) {
             let index = 0;
             snapshot.forEach(function(doc) {
+              console.log(doc.data().uid);
               if (
                 !isEquivalent(quizData[0], doc.data(), index) &&
-                !quizData[1].includes(doc.data().id)
+                !quizData[1].includes(doc.data().id) &&
+                index < quizData[0].length
               ) {
                 newQuizData.push(doc.data());
               }
-              index++;
             });
             setNewQuizzes(newQuizData);
           });
@@ -99,8 +101,6 @@ export default function Quizzes(props) {
             .then(function(snapshot) {
               completedQuizData.push(snapshot.data());
             });
-          console.log(completedQuizData);
-          console.log("Test");
           setMadeQuizzes(completedQuizData);
         }
       });
