@@ -44,10 +44,14 @@ export default function QuizForm(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
+    const username = firebase.getCurrentUsername();
+    const photoLink = firebase.getCurrentPhoto();
     firebase.db
       .collection("quizzes")
       .doc(quizID)
       .set({
+        creator: username,
+        creatorPhotoURL: photoLink,
         uid: quizID,
         articleURL: props.articleURL,
         articleTitle: props.articleTitle,
@@ -71,7 +75,6 @@ export default function QuizForm(props) {
       .catch(function(error) {
         console.error("Error writing document: ", error);
       });
-    const username = firebase.getCurrentUsername();
     firebase.db
       .collection("users")
       .doc(username)

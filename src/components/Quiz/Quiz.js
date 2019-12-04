@@ -31,11 +31,15 @@ export default function Quiz(props) {
     </Button>
   ) : null;
 
+  const photo = props.creatorPhotoURL ? (
+    <img src={props.creatorPhotoURL} className={classes.img} />
+  ) : (
+    <img src={require("../../assets/Logo.png")} className={classes.img} />
+  );
+
   return (
     <Card className={classes.container}>
-      <CardMedia>
-        <img src={require("../../assets/Logo.png")} className={classes.img} />
-      </CardMedia>
+      <CardMedia>{photo}</CardMedia>
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography component="h5" variant="h5">
