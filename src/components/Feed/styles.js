@@ -13,5 +13,13 @@ export const useStyles = makeStyles(theme => ({
     position: "fixed",
     top: "50%",
     left: "50%"
+  },
+
+  bottomLoader: {
+    width: "80%",
+    margin: "0 auto",
+    "& > * + *": {
+      marginTop: theme.spacing(2)
+    }
   }
 }));
