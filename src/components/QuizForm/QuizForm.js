@@ -53,6 +53,7 @@ export default function QuizForm(props) {
         .set({
           creator: username,
           creatorPhotoURL: photoLink,
+          createdAt: getDateAsString(),
           uid: quizID,
           articleURL: props.articleURL,
           articleTitle: props.articleTitle,
@@ -84,7 +85,8 @@ export default function QuizForm(props) {
         .set({
           id: quizID,
           articleTitle: props.articleTitle,
-          articleURL: props.articleURL
+          articleURL: props.articleURL,
+          createdAt: getDateAsString()
         });
       props.handleClose();
     } else {
@@ -329,4 +331,21 @@ export default function QuizForm(props) {
       </Container>
     </Dialog>
   );
+}
+
+function getDateAsString() {
+  var currentdate = new Date();
+  var dateTime =
+    currentdate.getDate() +
+    "/" +
+    (currentdate.getMonth() + 1) +
+    "/" +
+    currentdate.getFullYear() +
+    " @ " +
+    currentdate.getHours() +
+    ":" +
+    currentdate.getMinutes() +
+    ":" +
+    currentdate.getSeconds();
+  return dateTime;
 }

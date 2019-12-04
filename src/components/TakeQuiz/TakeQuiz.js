@@ -79,7 +79,8 @@ export default function TakeQuiz(props) {
       .set({
         id: quiz.uid,
         articleTitle: quiz.articleTitle,
-        articleURL: quiz.articleURL
+        articleURL: quiz.articleURL,
+        completedAt: getDateAsString()
       });
   };
 
@@ -326,4 +327,21 @@ function shuffleArray(array) {
     array[j] = temp;
   }
   return array;
+}
+
+function getDateAsString() {
+  var currentdate = new Date();
+  var dateTime =
+    currentdate.getDate() +
+    "/" +
+    (currentdate.getMonth() + 1) +
+    "/" +
+    currentdate.getFullYear() +
+    " @ " +
+    currentdate.getHours() +
+    ":" +
+    currentdate.getMinutes() +
+    ":" +
+    currentdate.getSeconds();
+  return dateTime;
 }
