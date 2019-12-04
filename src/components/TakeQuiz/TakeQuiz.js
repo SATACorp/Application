@@ -23,6 +23,12 @@ export default function TakeQuiz(props) {
 
   const [openResults, setOpenResults] = useState(false);
   const [quizPoints, setQuizPoints] = useState();
+  const [firstQuestionOrder, setFirstQuestionOrder] = useState(
+    shuffleArray([0, 1, 2, 3])
+  );
+  const [secondQuestionOrder, setSecondQuestionOrder] = useState(
+    shuffleArray([0, 1, 2, 3])
+  );
 
   useEffect(() => {
     var docRef = firebase.db.collection("quizzes").doc(props.quizID);
@@ -83,7 +89,9 @@ export default function TakeQuiz(props) {
       .collection("users")
       .doc(username)
       .set({
-        points: quizPoints + score
+        points: quizPoints + score,
+        username: firebase.getCurrentUsername(),
+        picURL: firebase.getCurrentPhoto()
       });
   };
 
@@ -164,7 +172,11 @@ export default function TakeQuiz(props) {
       />
     );
 
-    const radioGroup = shuffleArray([answer, wrong1, wrong2, wrong3]);
+    const radioGroup = [0, 1, 2, 3];
+    radioGroup[firstQuestionOrder[0]] = answer;
+    radioGroup[firstQuestionOrder[1]] = wrong1;
+    radioGroup[firstQuestionOrder[2]] = wrong2;
+    radioGroup[firstQuestionOrder[3]] = wrong3;
 
     return (
       <RadioGroup
@@ -213,7 +225,11 @@ export default function TakeQuiz(props) {
       />
     );
 
-    const radioGroup = shuffleArray([answer, wrong1, wrong2, wrong3]);
+    const radioGroup = [0, 1, 2, 3];
+    radioGroup[secondQuestionOrder[0]] = answer;
+    radioGroup[secondQuestionOrder[1]] = wrong1;
+    radioGroup[secondQuestionOrder[2]] = wrong2;
+    radioGroup[secondQuestionOrder[3]] = wrong3;
 
     return (
       <RadioGroup
@@ -302,6 +318,7 @@ export default function TakeQuiz(props) {
 }
 
 function shuffleArray(array) {
+  console.log("SHUFFLING");
   for (var i = array.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
     var temp = array[i];

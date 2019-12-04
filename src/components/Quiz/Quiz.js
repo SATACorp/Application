@@ -11,8 +11,10 @@ import CardMedia from "@material-ui/core/CardMedia";
 export default function Quiz(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
 
   const handleClickOpen = () => {
+    setShowQuiz(true);
     setOpen(true);
   };
 
@@ -37,6 +39,10 @@ export default function Quiz(props) {
     <img src={require("../../assets/Logo.png")} className={classes.img} />
   );
 
+  const quiz = showQuiz ? (
+    <TakeQuiz open={open} handleClose={handleClose} quizID={props.quizID} />
+  ) : null;
+
   return (
     <Card className={classes.container}>
       <CardMedia>{photo}</CardMedia>
@@ -47,7 +53,7 @@ export default function Quiz(props) {
           </Typography>
           {takeQuizButton}
         </CardContent>
-        <TakeQuiz open={open} handleClose={handleClose} quizID={props.quizID} />
+        {quiz}
       </div>
     </Card>
   );

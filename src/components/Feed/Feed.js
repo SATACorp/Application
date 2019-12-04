@@ -13,33 +13,27 @@ export default function Feed() {
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
-  // let newsUrl =
-  //   "https://newsapi.org/v2/top-headlines?country=us&apiKey=0ae0c8f3d55f44f19d14a61a4c1cb105";
-
   useEffect(() => {
     retrieveData();
-    console.log(newsArticles);
   }, []);
 
   const retrieveData = async () => {
     try {
-      // Set State: Loading
       setLoading(true);
-      console.log("Retrieving Data");
-      // Cloud Firestore: Query
+
       let initialQuery = await firebase.db
         .collection("news")
         .orderBy("publishedAt")
         .limit(5);
-      // Cloud Firestore: Query Snapshot
+
       let documentSnapshots = await initialQuery.get();
-      // Cloud Firestore: Document Data
+
       let documentData = documentSnapshots.docs.map(document =>
         document.data()
       );
-      // Cloud Firestore: Last Visible Document (Document ID To Start From For Proceeding Queries)
+
       let last = documentData[documentData.length - 1].publishedAt;
-      // Set State
+
       setLoading(false);
       setNewsArticles(documentData);
       setLastVisible(last);
@@ -50,24 +44,20 @@ export default function Feed() {
 
   const retrieveMore = async () => {
     try {
-      // Set State: Refreshing
       setRefreshing(true);
-      console.log("Retrieving additional Data");
-      // Cloud Firestore: Query (Additional Query)
+
       let additionalQuery = await firebase.db
         .collection("news")
         .orderBy("publishedAt")
         .startAfter(lastVisible)
         .limit(5);
-      // Cloud Firestore: Query Snapshot
+
       let documentSnapshots = await additionalQuery.get();
-      // Cloud Firestore: Document Data
+
       let documentData = documentSnapshots.docs.map(document =>
         document.data()
       );
-      // Cloud Firestore: Last Visible Document (Document ID To Start From For Proceeding Queries)
       let last = documentData[documentData.length - 1].publishedAt;
-      // Set State
 
       setNewsArticles([...newsArticles, ...documentData]);
       setLastVisible(last);
