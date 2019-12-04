@@ -44,35 +44,37 @@ export default function QuizForm(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // console.log(!multipleChoiceQ1Answer);
-      firebase.db
-        .collection("quizzes")
-        .doc(quizID)
-        .set({
-          uid: quizID,
-          articleURL: props.articleURL,
-          articleTitle: props.articleTitle,
-          multipleChoiceQ1: multipleChoiceQ1,
-          multipleChoiceQ1Answer: multipleChoiceQ1Answer,
-          multipleChoiceQ1Wrong1: multipleChoiceQ1Wrong1,
-          multipleChoiceQ1Wrong2: multipleChoiceQ1Wrong2,
-          multipleChoiceQ1Wrong3: multipleChoiceQ1Wrong3,
-          multipleChoiceQ2: multipleChoiceQ2,
-          multipleChoiceQ2Answer: multipleChoiceQ2Answer,
-          multipleChoiceQ2Wrong1: multipleChoiceQ2Wrong1,
-          multipleChoiceQ2Wrong2: multipleChoiceQ2Wrong2,
-          multipleChoiceQ2Wrong3: multipleChoiceQ2Wrong3,
-          trueFalseQ: trueFalseQ,
-          trueFalseQAnswer: trueFalseQAnswer,
-          trueFalseQWrong: trueFalseQWrong
-        })
-        .then(function() {
-          console.log("Quiz successfully written!");
-        })
-        .catch(function(error) {
-          console.error("Error writing document: ", error);
-        })
     const username = firebase.getCurrentUsername();
+    const photoLink = firebase.getCurrentPhoto();
+    firebase.db
+      .collection("quizzes")
+      .doc(quizID)
+      .set({
+        creator: username,
+        creatorPhotoURL: photoLink,
+        uid: quizID,
+        articleURL: props.articleURL,
+        articleTitle: props.articleTitle,
+        multipleChoiceQ1: multipleChoiceQ1,
+        multipleChoiceQ1Answer: multipleChoiceQ1Answer,
+        multipleChoiceQ1Wrong1: multipleChoiceQ1Wrong1,
+        multipleChoiceQ1Wrong2: multipleChoiceQ1Wrong2,
+        multipleChoiceQ1Wrong3: multipleChoiceQ1Wrong3,
+        multipleChoiceQ2: multipleChoiceQ2,
+        multipleChoiceQ2Answer: multipleChoiceQ2Answer,
+        multipleChoiceQ2Wrong1: multipleChoiceQ2Wrong1,
+        multipleChoiceQ2Wrong2: multipleChoiceQ2Wrong2,
+        multipleChoiceQ2Wrong3: multipleChoiceQ2Wrong3,
+        trueFalseQ: trueFalseQ,
+        trueFalseQAnswer: trueFalseQAnswer,
+        trueFalseQWrong: trueFalseQWrong
+      })
+      .then(function() {
+        console.log("Quiz successfully written!");
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
+      });
     firebase.db
       .collection("users")
       .doc(username)

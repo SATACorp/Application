@@ -28,7 +28,8 @@ function Signup(props) {
         .doc(username)
         .set({
           points: 30,
-          picURL: photoURL
+          picURL: photoURL,
+          username: username
         })
         .catch(function(error) {
           console.error("Error writing document: ", error);

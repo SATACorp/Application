@@ -127,7 +127,13 @@ export default function Quizzes(props) {
       );
     } else {
       newQuizCards = newQuizzes.map(data => (
-        <Quiz quizName={data.articleTitle} quizID={data.uid} key={data.uid} />
+        <Quiz
+          photo={data.creatorPhotoURL}
+          creator={data.creator}
+          quizName={data.articleTitle}
+          quizID={data.uid}
+          key={data.uid}
+        />
       ));
     }
   } else {
@@ -148,6 +154,8 @@ export default function Quizzes(props) {
     } else {
       completedQuizCards = completedQuizzes.map(data => (
         <Quiz
+          photo={data.creatorPhotoURL}
+          creator={data.creator}
           quizName={data.articleTitle}
           quizID={data.uid}
           key={data.uid}
@@ -173,6 +181,8 @@ export default function Quizzes(props) {
     } else {
       madeQuizCards = madeQuizzes.map(data => (
         <Quiz
+          photo={data.creatorPhotoURL}
+          creator={data.creator}
           quizName={data.articleTitle}
           quizID={data.uid}
           key={data.uid}
