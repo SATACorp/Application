@@ -8,5 +8,10 @@ export const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1)
+  },
+  loader: {
+    position: "fixed",
+    top: "50%",
+    left: "50%"
   }
 }));
