@@ -50,7 +50,6 @@ function Profile(props) {
         setCount(count);
       });
   }, []);
-
   return (
     <Container className={classes.container}>
       <Card>
