@@ -3,7 +3,7 @@ import { useStyles } from "./styles";
 import firebase from "../../firebase";
 import NewsCard from "../NewsCard/NewsCard";
 import { CircularProgress } from "@material-ui/core";
-import LazyLoad from "react-lazyload";
+//import LazyLoad from "react-lazyload";
 
 export default function Feed() {
   const classes = useStyles();

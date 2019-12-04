@@ -5,9 +5,10 @@ export const useStyles = makeStyles(theme => ({
     maxWidth: 250,
   },
   container: {
+    paddingTop: theme.spacing(12),
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
-    maxWidth: 700,
+    maxWidth: 600,
     margin: "0 auto"
   },
   button: {
