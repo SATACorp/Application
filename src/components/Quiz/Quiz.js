@@ -2,12 +2,8 @@ import React, { useState } from "react";
 import { useStyles } from "./styles";
 import firebase from "../../firebase";
 import { TakeQuiz } from "../TakeQuiz";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Logo from "../../assets/Logo.png";
-import { flexbox } from "@material-ui/system";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -23,6 +19,18 @@ export default function Quiz(props) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const takeQuizButton = !props.completed ? (
+    <Button
+      className={classes.button}
+      variant="contained"
+      color="primary"
+      onClick={handleClickOpen}
+    >
+      Take Quiz
+    </Button>
+  ) : null;
+
   return (
     <Card className={classes.container}>
       <CardMedia>
@@ -33,14 +41,7 @@ export default function Quiz(props) {
           <Typography component="h5" variant="h5">
             {props.quizName}
           </Typography>
-          <Button
-            className={classes.button}
-            variant="contained"
-            color="primary"
-            onClick={handleClickOpen}
-          >
-            Take Quiz
-          </Button>
+          {takeQuizButton}
         </CardContent>
         <TakeQuiz open={open} handleClose={handleClose} quizID={props.quizID} />
       </div>

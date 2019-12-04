@@ -64,6 +64,17 @@ export default function TakeQuiz(props) {
     handleClickOpen(true);
     props.handleClose();
     updatePoints(getScore());
+    const username = firebase.getCurrentUsername();
+    firebase.db
+      .collection("users")
+      .doc(username)
+      .collection("quizzesTaken")
+      .doc(quiz.uid)
+      .set({
+        id: quiz.uid,
+        articleTitle: quiz.articleTitle,
+        articleURL: quiz.articleURL
+      });
   };
 
   const updatePoints = score => {

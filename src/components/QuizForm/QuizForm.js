@@ -71,6 +71,17 @@ export default function QuizForm(props) {
       .catch(function(error) {
         console.error("Error writing document: ", error);
       });
+    const username = firebase.getCurrentUsername();
+    firebase.db
+      .collection("users")
+      .doc(username)
+      .collection("quizzesMade")
+      .doc(quizID)
+      .set({
+        id: quizID,
+        articleTitle: props.articleTitle,
+        articleURL: props.articleURL
+      });
     props.handleClose();
   };
 
