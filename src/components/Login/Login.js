@@ -32,7 +32,7 @@ function Login(props) {
     <Container component="main" maxWidth="xs">
       <Card className={classes.card}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <LockOutlinedIcon color="primary"/>
         </Avatar>
         <Typography component="h1" variant="h5">
           Log In
@@ -83,7 +83,7 @@ function Login(props) {
           </Grid>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link to="/signup">Don't have an account? Sign up</Link>
+              <Link to="/signup">Don't have an account? Sign up!</Link>
             </Grid>
           </Grid>
         </form>

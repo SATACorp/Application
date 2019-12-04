@@ -43,24 +43,11 @@ export default function Leaderboard(props) {
   return (
     <MuiThemeProvider theme={theme}>
       <h1 className={classes.pageTitle}>All-Time Leaderboard</h1>
-      <Container className={classes.container} component="main" maxWidth="xl">
-        <h1 className={classes.boardPlacings}>1.</h1>
-        <LeaderboardCard username="Username Here" score="Score Here" />
-        <h1 className={classes.boardPlacings}>2.</h1>
-        <LeaderboardCard username="Username Here" score="Score Here" />
-        <h1 className={classes.boardPlacings}>3.</h1>
-        <LeaderboardCard username="Username Here" score="Score Here" />
+      <Container className={classes.flex}>
+        <LeaderboardCard username="Username Here" score="Score Here" className={classes.cards} />
+        <LeaderboardCard username="Username Here" score="Score Here" className={classes.cards}/>
+        <LeaderboardCard username="Username Here" score="Score Here" className={classes.cards} />
       </Container>
-      <Card className={classes.playerCard} xs={3}>
-        <h2>Your position is (X) out of (Y USERS).</h2>
-        <CardContent>
-          <LeaderboardCard
-            username={firebase.getCurrentUsername()}
-            score={points}
-            photo={firebase.getCurrentPhoto()}
-          ></LeaderboardCard>
-        </CardContent>
-      </Card>
     </MuiThemeProvider>
   );
 }

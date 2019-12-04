@@ -50,6 +50,15 @@ export const useStyles = makeStyles(theme => ({
   boardPlacings: {
     fontFamily:'Roboto',
     fontSize:50
+  },
+
+  cards: {
+    width: 100
+  },
+
+  flex: {
+    display: "flex-column",
+    maxWidth: 500
   }
 
 }));

@@ -109,7 +109,7 @@ function Signup(props) {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
+              color="secondary"
               className={classes.submit}
               onClick={handleSubmit}
             >
@@ -118,7 +118,7 @@ function Signup(props) {
           </Grid>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link to="/login">Already have an account? Sign in</Link>
+              <Link to="/login">Already have an account? Log in!</Link>
             </Grid>
           </Grid>
         </form>
