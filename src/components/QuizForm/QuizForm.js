@@ -46,46 +46,68 @@ export default function QuizForm(props) {
     e.preventDefault();
     const username = firebase.getCurrentUsername();
     const photoLink = firebase.getCurrentPhoto();
-    firebase.db
-      .collection("quizzes")
-      .doc(quizID)
-      .set({
-        creator: username,
-        creatorPhotoURL: photoLink,
-        uid: quizID,
-        articleURL: props.articleURL,
-        articleTitle: props.articleTitle,
-        multipleChoiceQ1: multipleChoiceQ1,
-        multipleChoiceQ1Answer: multipleChoiceQ1Answer,
-        multipleChoiceQ1Wrong1: multipleChoiceQ1Wrong1,
-        multipleChoiceQ1Wrong2: multipleChoiceQ1Wrong2,
-        multipleChoiceQ1Wrong3: multipleChoiceQ1Wrong3,
-        multipleChoiceQ2: multipleChoiceQ2,
-        multipleChoiceQ2Answer: multipleChoiceQ2Answer,
-        multipleChoiceQ2Wrong1: multipleChoiceQ2Wrong1,
-        multipleChoiceQ2Wrong2: multipleChoiceQ2Wrong2,
-        multipleChoiceQ2Wrong3: multipleChoiceQ2Wrong3,
-        trueFalseQ: trueFalseQ,
-        trueFalseQAnswer: trueFalseQAnswer,
-        trueFalseQWrong: trueFalseQWrong
-      })
-      .then(function() {
-        console.log("Quiz successfully written!");
-      })
-      .catch(function(error) {
-        console.error("Error writing document: ", error);
-      });
-    firebase.db
-      .collection("users")
-      .doc(username)
-      .collection("quizzesMade")
-      .doc(quizID)
-      .set({
-        id: quizID,
-        articleTitle: props.articleTitle,
-        articleURL: props.articleURL
-      });
-    props.handleClose();
+    if (formIsComplete()) {
+      firebase.db
+        .collection("quizzes")
+        .doc(quizID)
+        .set({
+          creator: username,
+          creatorPhotoURL: photoLink,
+          uid: quizID,
+          articleURL: props.articleURL,
+          articleTitle: props.articleTitle,
+          multipleChoiceQ1: multipleChoiceQ1,
+          multipleChoiceQ1Answer: multipleChoiceQ1Answer,
+          multipleChoiceQ1Wrong1: multipleChoiceQ1Wrong1,
+          multipleChoiceQ1Wrong2: multipleChoiceQ1Wrong2,
+          multipleChoiceQ1Wrong3: multipleChoiceQ1Wrong3,
+          multipleChoiceQ2: multipleChoiceQ2,
+          multipleChoiceQ2Answer: multipleChoiceQ2Answer,
+          multipleChoiceQ2Wrong1: multipleChoiceQ2Wrong1,
+          multipleChoiceQ2Wrong2: multipleChoiceQ2Wrong2,
+          multipleChoiceQ2Wrong3: multipleChoiceQ2Wrong3,
+          trueFalseQ: trueFalseQ,
+          trueFalseQAnswer: trueFalseQAnswer,
+          trueFalseQWrong: trueFalseQWrong
+        })
+        .then(function() {
+          console.log("Quiz successfully written!");
+        })
+        .catch(function(error) {
+          console.error("Error writing document: ", error);
+        });
+      firebase.db
+        .collection("users")
+        .doc(username)
+        .collection("quizzesMade")
+        .doc(quizID)
+        .set({
+          id: quizID,
+          articleTitle: props.articleTitle,
+          articleURL: props.articleURL
+        });
+      props.handleClose();
+    } else {
+      alert("All questions must be completed");
+    }
+  };
+
+  const formIsComplete = () => {
+    return (
+      multipleChoiceQ1 != null &&
+      multipleChoiceQ1Answer != null &&
+      multipleChoiceQ1Wrong1 != null &&
+      multipleChoiceQ1Wrong2 != null &&
+      multipleChoiceQ1Wrong3 != null &&
+      multipleChoiceQ2 != null &&
+      multipleChoiceQ2Answer != null &&
+      multipleChoiceQ2Wrong1 != null &&
+      multipleChoiceQ2Wrong2 != null &&
+      multipleChoiceQ2Wrong3 != null &&
+      trueFalseQ != null &&
+      trueFalseQAnswer != null &&
+      trueFalseQWrong != null
+    );
   };
 
   return (
