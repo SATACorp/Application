@@ -33,8 +33,8 @@ export default function Quiz(props) {
     </Button>
   ) : null;
 
-  const photo = props.creatorPhotoURL ? (
-    <img src={props.creatorPhotoURL} className={classes.img} />
+  const photo = props.photo ? (
+    <img src={props.photo} className={classes.img} />
   ) : (
     <img src={require("../../assets/Logo.png")} className={classes.img} />
   );
@@ -45,14 +45,17 @@ export default function Quiz(props) {
 
   return (
     <Card className={classes.container}>
-      <CardMedia>{photo}</CardMedia>
+      <CardContent className={classes.userContent}>
+        <CardMedia>{photo}</CardMedia>
+        <Typography component="h5" variant="h5">
+          {props.creator}
+        </Typography>
+      </CardContent>
       <div className={classes.details}>
         <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5">
-            {props.quizName}
-          </Typography>
-          {takeQuizButton}
+          <Typography variant="h7">{props.quizName}</Typography>
         </CardContent>
+        <CardContent> {takeQuizButton}</CardContent>
         {quiz}
       </div>
     </Card>
