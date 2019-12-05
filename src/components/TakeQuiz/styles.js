@@ -4,12 +4,16 @@ export const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
     flexDirection: "column",
-    width: "500px"
+    maxWidth: "500px",
+    margin: "0 auto"
   },
   formControl: {
     margin: theme.spacing(3)
   },
   resultsText: {
     textAlign: "center"
+  },
+  submit: {
+    margin: "0 auto"
   }
 }));

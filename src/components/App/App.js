@@ -81,12 +81,14 @@ function App() {
     </div>
   );
 
+  const navbar = loggedIn ? <Navbar isLoggedIn={loggedIn} /> : null;
+
   return firebaseInitialized !== false ? (
     <div className={classes.container}>
       <BrowserRouter>
         <Header />
         <Switch>{routes}</Switch>
-        <Navbar isLoggedIn={loggedIn} />
+        {navbar}
       </BrowserRouter>
     </div>
   ) : (

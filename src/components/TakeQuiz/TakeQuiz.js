@@ -237,14 +237,15 @@ export default function TakeQuiz(props) {
     radioGroup[secondQuestionOrder[2]] = wrong2;
     radioGroup[secondQuestionOrder[3]] = wrong3;
 
+    const letters = ["A", "B", "C", "D"];
+
     return (
       <RadioGroup
         aria-label="question2"
         name="question2"
-        // value={value}
         onChange={e => setAnswer2(e.target.value)}
       >
-        {radioGroup.map(radio => {
+        {radioGroup.map((radio, index) => {
           return radio;
         })}
       </RadioGroup>
@@ -278,7 +279,6 @@ export default function TakeQuiz(props) {
             <RadioGroup
               aria-label="question2"
               name="question2"
-              // value={value}
               onChange={e => setAnswer3(e.target.value)}
             >
               <FormControlLabel value="true" control={<Radio />} label="True" />
@@ -289,13 +289,12 @@ export default function TakeQuiz(props) {
               />
             </RadioGroup>
           </FormControl>
-          <Grid item xs={12}>
+          <Grid item xs={8} className={classes.submit}>
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
-              className={classes.submit}
               onClick={handleSubmit}
             >
               Submit Quiz
@@ -331,7 +330,6 @@ export default function TakeQuiz(props) {
 }
 
 function shuffleArray(array) {
-  console.log("SHUFFLING");
   for (var i = array.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
     var temp = array[i];

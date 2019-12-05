@@ -10,14 +10,19 @@ import DoneOutlineIcon from "@material-ui/icons/DoneOutline";
 
 export default function Navbar(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState('feed');
+  const [value, setValue] = React.useState();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-    <BottomNavigation value={value} onChange={handleChange} className={classes.container} showLabels>
+    <BottomNavigation
+      value={value}
+      onChange={handleChange}
+      className={classes.container}
+      showLabels
+    >
       <BottomNavigationAction
         className={classes.icon}
         component={Link}
