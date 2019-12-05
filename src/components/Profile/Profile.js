@@ -57,6 +57,7 @@ function Profile(props) {
   const profileCard = !loading ? (
     <CardContent>
       <LeaderboardCard
+        profile={true}
         username={firebase.getCurrentUsername()}
         score={points}
         photo={firebase.getCurrentPhoto()}

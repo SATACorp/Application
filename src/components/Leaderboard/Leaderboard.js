@@ -3,6 +3,8 @@ import { useStyles } from "./styles";
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { LeaderboardCard } from "../LeaderboardCard";
 import firebase from "../../firebase";
@@ -47,9 +49,9 @@ export default function Leaderboard(props) {
       leaderboardCards = users.map((user, index) => {
         return (
           <LeaderboardCard
+            profile={false}
             username={user.username}
             score={user.points}
-            className={classes.cards}
             photo={user.picURL}
             rank={index + 1}
             key={index}
@@ -68,8 +70,15 @@ export default function Leaderboard(props) {
 
   return (
     <MuiThemeProvider theme={theme}>
-      <h1 className={classes.pageTitle}>All-Time Leaderboard</h1>
-      <Container className={classes.flex}>{topUsers()}</Container>
+      {/* <h1 className={classes.pageTitle}>All-Time Leaderboard</h1> */}
+      <Container className={classes.flex}>
+        <Card className={classes.titleCard}>
+          <Typography variant="h3" className={classes.pageTitle}>
+            Top 10 Users
+          </Typography>
+        </Card>
+        {topUsers()}
+      </Container>
     </MuiThemeProvider>
   );
 }

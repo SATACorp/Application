@@ -118,7 +118,7 @@ export default function QuizForm(props) {
       onClose={props.handleClose}
       aria-labelledby="form-dialog-title"
     >
-      <Container className={classes.container} component="main" maxWidth="xs">
+      <Container className={classes.container} component="main">
         <h2>Make a news quiz!</h2>
         <form className={classes.container} noValidate autoComplete="off">
           <Paper className={classes.quizSection}>
@@ -129,6 +129,7 @@ export default function QuizForm(props) {
                 </Grid>
                 <Grid item>
                   <TextField
+                    className={classes.input}
                     id="input-with-icon-grid"
                     label="Question #1"
                     onChange={e => setMultipleChoiceQ1(e.target.value)}
@@ -144,6 +145,7 @@ export default function QuizForm(props) {
                 </Grid>
                 <Grid item>
                   <TextField
+                    className={classes.input}
                     id="input-with-icon-grid"
                     label="Correct Answer"
                     onChange={e => setMultipleChoiceQ1Answer(e.target.value)}
@@ -159,6 +161,7 @@ export default function QuizForm(props) {
                 </Grid>
                 <Grid item>
                   <TextField
+                    className={classes.input}
                     id="input-with-icon-grid"
                     label="Wrong Answer #1"
                     onChange={e => setMultipleChoiceQ1Wrong1(e.target.value)}
@@ -174,6 +177,7 @@ export default function QuizForm(props) {
                 </Grid>
                 <Grid item>
                   <TextField
+                    className={classes.input}
                     id="input-with-icon-grid"
                     label="Wrong Answer #2"
                     onChange={e => setMultipleChoiceQ1Wrong2(e.target.value)}
@@ -189,6 +193,7 @@ export default function QuizForm(props) {
                 </Grid>
                 <Grid item>
                   <TextField
+                    className={classes.input}
                     id="input-with-icon-grid"
                     label="Wrong Answer #3"
                     onChange={e => setMultipleChoiceQ1Wrong3(e.target.value)}
@@ -206,6 +211,7 @@ export default function QuizForm(props) {
                 </Grid>
                 <Grid item>
                   <TextField
+                    className={classes.input}
                     id="input-with-icon-grid"
                     label="Question #2"
                     onChange={e => setMultipleChoiceQ2(e.target.value)}
@@ -221,6 +227,7 @@ export default function QuizForm(props) {
                 </Grid>
                 <Grid item>
                   <TextField
+                    className={classes.input}
                     id="input-with-icon-grid"
                     label="Correct Answer"
                     onChange={e => setMultipleChoiceQ2Answer(e.target.value)}
@@ -236,6 +243,7 @@ export default function QuizForm(props) {
                 </Grid>
                 <Grid item>
                   <TextField
+                    className={classes.input}
                     id="input-with-icon-grid"
                     label="Wrong Answer #1"
                     onChange={e => setMultipleChoiceQ2Wrong1(e.target.value)}
@@ -251,6 +259,7 @@ export default function QuizForm(props) {
                 </Grid>
                 <Grid item>
                   <TextField
+                    className={classes.input}
                     id="input-with-icon-grid"
                     label="Wrong Answer #2"
                     onChange={e => setMultipleChoiceQ2Wrong2(e.target.value)}
@@ -266,6 +275,7 @@ export default function QuizForm(props) {
                 </Grid>
                 <Grid item>
                   <TextField
+                    className={classes.input}
                     id="input-with-icon-grid"
                     label="Wrong Answer #3"
                     onChange={e => setMultipleChoiceQ2Wrong3(e.target.value)}
@@ -283,6 +293,7 @@ export default function QuizForm(props) {
                 </Grid>
                 <Grid item>
                   <TextField
+                    className={classes.input}
                     id="input-with-icon-grid"
                     label="Question #3"
                     onChange={e => setTrueFalseQ(e.target.value)}

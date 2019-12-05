@@ -66,6 +66,11 @@ export default function TakeQuiz(props) {
     setOpenResults(false);
   };
 
+  const handleScoreClose = () => {
+    window.location.reload();
+    setOpenResults(false);
+  };
+
   const handleSubmit = () => {
     handleClickOpen(true);
     props.handleClose();
@@ -132,7 +137,7 @@ export default function TakeQuiz(props) {
               <HighlightOffIcon color="primary" />
             </Grid>
             <Grid item>
-              <DialogContentText>Question Incorrect</DialogContentText>
+              <DialogContentText>{`Question ${questionNum} Incorrect`}</DialogContentText>
             </Grid>
           </Grid>
         </DialogContent>
@@ -300,16 +305,23 @@ export default function TakeQuiz(props) {
       </Dialog>
       <Dialog
         open={openResults}
-        onClose={handleClose}
+        onClose={handleScoreClose}
         aria-labelledby="form-dialog-title"
       >
+        <DialogContent>
+          <DialogContentText className={classes.resultsText}>
+            Results
+          </DialogContentText>
+        </DialogContent>
         {getResultBox(answer1, quiz.multipleChoiceQ1Answer, 1)}
         {getResultBox(answer2, quiz.multipleChoiceQ2Answer, 2)}
         {getResultBox(answer3, quiz.trueFalseQAnswer, 3)}
         <DialogContent>
           <Grid container spacing={1} alignItems="flex-end">
             <Grid item>
-              <DialogContentText>{`You Scored ${getScore()} Points`}</DialogContentText>
+              <DialogContentText
+                className={classes.resultsText}
+              >{`You Scored ${getScore()} Points`}</DialogContentText>
             </Grid>
           </Grid>
         </DialogContent>

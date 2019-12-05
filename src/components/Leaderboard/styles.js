@@ -10,57 +10,25 @@ export const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "row",
-    paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1),
-    marginTop: theme.spacing(1),
-  },
-
-  paper: {
-    marginTop: theme.spacing(8),
-    alignItems: "center"
-  },
-
-  checkUser: {
-    margin: theme.spacing(3),
-    alignItems: "center"
-  },
-
-  pageTitle: {
-    color:"white",
-    fontFamily:"Roboto",
-    fontSize: 50
-  },
-
-  playerCard: {
-    fontSize: 20,
-    fontFamily:'Roboto',
-    width: '40%',
-    display: "flex",
-    margin: "0 auto",
-    marginTop: theme.spacing(2),
-    justifyContent: "center",
-    alignItems: "center",
     flexDirection: "column",
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
+    marginTop: theme.spacing(1),
     maxWidth: "1024px"
   },
 
-  boardPlacings: {
-    fontFamily:'Roboto',
-    fontSize:50
+  pageTitle: {
+    padding: theme.spacing(1)
   },
 
-  cards: {
-    width: 100
+  titleCard: {
+    marginBottom: theme.spacing(1)
   },
 
   flex: {
     display: "flex-column",
     maxWidth: 500
   }
-
 }));
 
 export const theme = createMuiTheme({
