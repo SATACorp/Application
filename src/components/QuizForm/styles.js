@@ -5,15 +5,21 @@ export const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    width: "500px",
+    width: "100%"
   },
   margin: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(3)
   },
   quizSection: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    width: "400px"
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
+  },
+  input: {
+    width: "350px"
   }
 }));

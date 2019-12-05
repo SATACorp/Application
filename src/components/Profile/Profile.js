@@ -6,6 +6,7 @@ import firebase from "../../firebase";
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import { CircularProgress } from "@material-ui/core";
 
 import { LeaderboardCard } from "../LeaderboardCard";
 
@@ -14,6 +15,7 @@ function Profile(props) {
   const [points, setPoints] = useState();
   const [rank, setRank] = useState();
   const [count, setCount] = useState();
+  const [loading, setLoading] = useState(true);
 
   const handleLogout = () => {
     firebase.logout();
@@ -48,31 +50,38 @@ function Profile(props) {
           userData.push(doc.data());
         });
         setCount(count);
+        setLoading(false);
       });
   }, []);
 
+  const profileCard = !loading ? (
+    <CardContent>
+      <LeaderboardCard
+        profile={true}
+        username={firebase.getCurrentUsername()}
+        score={points}
+        photo={firebase.getCurrentPhoto()}
+      ></LeaderboardCard>
+      <h2 className={classes.userCard}>
+        {`Your position on the leaderboard is ${rank} out of ${count} users`}
+      </h2>
+      <Button
+        variant="contained"
+        className={classes.button}
+        onClick={handleLogout}
+      >
+        Logout
+      </Button>
+    </CardContent>
+  ) : (
+    <div className={classes.loader}>
+      <CircularProgress />
+    </div>
+  );
+
   return (
     <Container className={classes.container}>
-      <Card>
-        <CardContent>
-          <LeaderboardCard
-            username={firebase.getCurrentUsername()}
-            score={points}
-            photo={firebase.getCurrentPhoto()}
-          ></LeaderboardCard>
-          <h2 className={classes.userCard}>
-            {`Your position on the leaderboard is ${rank} out of ${count} users`}
-          </h2>
-          <Button
-            variant="contained"
-            className={classes.button}
-            onClick={handleLogout}
-          >
-            Logout
-          </Button>
-        </CardContent>
-        <CardContent></CardContent>
-      </Card>
+      <Card>{profileCard}</Card>
     </Container>
   );
 }

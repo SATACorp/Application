@@ -23,6 +23,12 @@ export default function TakeQuiz(props) {
 
   const [openResults, setOpenResults] = useState(false);
   const [quizPoints, setQuizPoints] = useState();
+  const [firstQuestionOrder, setFirstQuestionOrder] = useState(
+    shuffleArray([0, 1, 2, 3])
+  );
+  const [secondQuestionOrder, setSecondQuestionOrder] = useState(
+    shuffleArray([0, 1, 2, 3])
+  );
 
   useEffect(() => {
     var docRef = firebase.db.collection("quizzes").doc(props.quizID);
@@ -60,6 +66,11 @@ export default function TakeQuiz(props) {
     setOpenResults(false);
   };
 
+  const handleScoreClose = () => {
+    window.location.reload();
+    setOpenResults(false);
+  };
+
   const handleSubmit = () => {
     handleClickOpen(true);
     props.handleClose();
@@ -73,7 +84,8 @@ export default function TakeQuiz(props) {
       .set({
         id: quiz.uid,
         articleTitle: quiz.articleTitle,
-        articleURL: quiz.articleURL
+        articleURL: quiz.articleURL,
+        completedAt: getDateAsString()
       });
   };
 
@@ -83,7 +95,9 @@ export default function TakeQuiz(props) {
       .collection("users")
       .doc(username)
       .set({
-        points: quizPoints + score
+        points: quizPoints + score,
+        username: firebase.getCurrentUsername(),
+        picURL: firebase.getCurrentPhoto()
       });
   };
 
@@ -123,7 +137,7 @@ export default function TakeQuiz(props) {
               <HighlightOffIcon color="primary" />
             </Grid>
             <Grid item>
-              <DialogContentText>Question Incorrect</DialogContentText>
+              <DialogContentText>{`Question ${questionNum} Incorrect`}</DialogContentText>
             </Grid>
           </Grid>
         </DialogContent>
@@ -164,7 +178,11 @@ export default function TakeQuiz(props) {
       />
     );
 
-    const radioGroup = shuffleArray([answer, wrong1, wrong2, wrong3]);
+    const radioGroup = [0, 1, 2, 3];
+    radioGroup[firstQuestionOrder[0]] = answer;
+    radioGroup[firstQuestionOrder[1]] = wrong1;
+    radioGroup[firstQuestionOrder[2]] = wrong2;
+    radioGroup[firstQuestionOrder[3]] = wrong3;
 
     return (
       <RadioGroup
@@ -213,7 +231,11 @@ export default function TakeQuiz(props) {
       />
     );
 
-    const radioGroup = shuffleArray([answer, wrong1, wrong2, wrong3]);
+    const radioGroup = [0, 1, 2, 3];
+    radioGroup[secondQuestionOrder[0]] = answer;
+    radioGroup[secondQuestionOrder[1]] = wrong1;
+    radioGroup[secondQuestionOrder[2]] = wrong2;
+    radioGroup[secondQuestionOrder[3]] = wrong3;
 
     return (
       <RadioGroup
@@ -283,16 +305,23 @@ export default function TakeQuiz(props) {
       </Dialog>
       <Dialog
         open={openResults}
-        onClose={handleClose}
+        onClose={handleScoreClose}
         aria-labelledby="form-dialog-title"
       >
+        <DialogContent>
+          <DialogContentText className={classes.resultsText}>
+            Results
+          </DialogContentText>
+        </DialogContent>
         {getResultBox(answer1, quiz.multipleChoiceQ1Answer, 1)}
         {getResultBox(answer2, quiz.multipleChoiceQ2Answer, 2)}
         {getResultBox(answer3, quiz.trueFalseQAnswer, 3)}
         <DialogContent>
           <Grid container spacing={1} alignItems="flex-end">
             <Grid item>
-              <DialogContentText>{`You Scored ${getScore()} Points`}</DialogContentText>
+              <DialogContentText
+                className={classes.resultsText}
+              >{`You Scored ${getScore()} Points`}</DialogContentText>
             </Grid>
           </Grid>
         </DialogContent>
@@ -302,6 +331,7 @@ export default function TakeQuiz(props) {
 }
 
 function shuffleArray(array) {
+  console.log("SHUFFLING");
   for (var i = array.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
     var temp = array[i];
@@ -309,4 +339,21 @@ function shuffleArray(array) {
     array[j] = temp;
   }
   return array;
+}
+
+function getDateAsString() {
+  var currentdate = new Date();
+  var dateTime =
+    currentdate.getDate() +
+    "/" +
+    (currentdate.getMonth() + 1) +
+    "/" +
+    currentdate.getFullYear() +
+    " @ " +
+    currentdate.getHours() +
+    ":" +
+    currentdate.getMinutes() +
+    ":" +
+    currentdate.getSeconds();
+  return dateTime;
 }

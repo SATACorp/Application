@@ -8,6 +8,7 @@
     "firebase": "^7.3.0",
     "node-fetch": "^2.6.0",
     "react": "^16.10.2",
+    "react-bottom-scroll-listener": "^3.0.0",
     "react-dom": "^16.10.2",
     "react-lazyload": "^2.6.5",
     "react-router-dom": "^5.1.2",

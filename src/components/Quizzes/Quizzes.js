@@ -63,6 +63,7 @@ export default function Quizzes(props) {
           .collection("users")
           .doc(username)
           .collection("quizzesMade")
+          .orderBy("createdAt", "desc")
           .get()
           .then(function(snapshot) {
             snapshot.forEach(function(doc) {
@@ -74,6 +75,7 @@ export default function Quizzes(props) {
             let newQuizData = [];
             firebase.db
               .collection("quizzes")
+              .orderBy("createdAt", "desc")
               .get()
               .then(function(snapshot) {
                 snapshot.forEach(function(doc) {

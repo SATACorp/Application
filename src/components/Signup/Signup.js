@@ -20,36 +20,50 @@ function Signup(props) {
   const [photoURL, setPhotoURL] = useState("");
 
   async function handleSubmit() {
-    try {
-      await firebase.register(username, email, password, photoURL);
-      props.setLoggedIn(true);
-      firebase.db
-        .collection("users")
-        .doc(username)
-        .set({
-          points: 30,
-          picURL: photoURL,
-          username: username
-        })
-        .catch(function(error) {
-          console.error("Error writing document: ", error);
-        });
-      firebase.db
-        .collection("users")
-        .doc(username)
-        .collection("quizzesTaken")
-        .doc("0781963e-0b72-4315-9600-6bb34f404285")
-        .set({
-          id: "0781963e-0b72-4315-9600-6bb34f404285"
-        })
-        .catch(function(error) {
-          console.error("Error writing document: ", error);
-        });
-      props.history.replace("/feed");
-    } catch (err) {
-      alert(err.message);
+    console.log(formIsComplete());
+    if (formIsComplete()) {
+      try {
+        await firebase.register(username, email, password, photoURL);
+        props.setLoggedIn(true);
+        firebase.db
+          .collection("users")
+          .doc(username)
+          .set({
+            points: 30,
+            picURL: photoURL,
+            username: username
+          })
+          .catch(function(error) {
+            console.error("Error writing document: ", error);
+          });
+        firebase.db
+          .collection("users")
+          .doc(username)
+          .collection("quizzesTaken")
+          .doc("0781963e-0b72-4315-9600-6bb34f404285")
+          .set({
+            id: "0781963e-0b72-4315-9600-6bb34f404285"
+          })
+          .catch(function(error) {
+            console.error("Error writing document: ", error);
+          });
+        props.history.replace("/feed");
+      } catch (err) {
+        alert(err.message);
+      }
+    } else {
+      alert("Form must be complete");
     }
   }
+
+  const formIsComplete = () => {
+    return (
+      email != null &&
+      password != null &&
+      username != null &&
+      photoURL.length > 1
+    );
+  };
 
   return (
     <Container component="main" maxWidth="xs">
