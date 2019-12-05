@@ -11,9 +11,10 @@ import { QuizForm } from "../../components/QuizForm";
 import { Header } from "../../components/Header";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
+import { withRouter } from "react-router-dom";
 import firebase from "../../firebase";
 
-function App() {
+function App(props) {
   const classes = useStyles();
 
   const [firebaseInitialized, setFirebaseInitialized] = useState(false);
@@ -46,6 +47,11 @@ function App() {
       <Route
         exact
         path="/login"
+        render={() => <Login setLoggedIn={setLoggedIn} />}
+      />
+      <Route
+        exact
+        path="/"
         render={() => <Login setLoggedIn={setLoggedIn} />}
       />
       <PrivateRoute authed={loggedIn} exact path="/feed" component={Feed} />
