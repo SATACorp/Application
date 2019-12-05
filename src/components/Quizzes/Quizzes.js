@@ -148,7 +148,7 @@ export default function Quizzes(props) {
     if (completedQuizzes.length == 0) {
       completedQuizCards = (
         <div>
-          <h2>No Completed Quizzes</h2>
+          <h2 className={classes.pageTitle}>No Completed Quizzes</h2>
         </div>
       );
     } else {
@@ -175,7 +175,7 @@ export default function Quizzes(props) {
     if (madeQuizzes.length == 0) {
       madeQuizCards = (
         <div>
-          <h2>You Haven't Created Any Quizzes</h2>
+          <h2 className={classes.pageTitle}>You Haven't Created Any Quizzes</h2>
         </div>
       );
     } else {
