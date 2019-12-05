@@ -70,10 +70,13 @@ export default function Leaderboard(props) {
 
   return (
     <MuiThemeProvider theme={theme}>
-      {/* <h1 className={classes.pageTitle}>All-Time Leaderboard</h1> */}
       <Container className={classes.flex}>
         <Card className={classes.titleCard}>
-          <Typography variant="h3" className={classes.pageTitle}>
+          <Typography
+            variant="h3"
+            color="textSecondary"
+            className={classes.pageTitle}
+          >
             Top 10 Users
           </Typography>
         </Card>
